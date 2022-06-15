@@ -1,0 +1,97 @@
+---
+title: "Tuna Catch Graph"
+author: "Conner Smith"
+date: "6/15/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(here)
+
+```
+
+## List of all Tuna stocks 
+
+ALBAIO 
+ALBAMED (Done)
+ALBANATL
+ALBANPAC
+ALBASATL
+ALBASPAC
+ATBTUNAEATL
+ATBTUNAWATL
+BIGEYEATL
+BIGEYECWPAC
+BIGEYEEPAC
+BIGEYEIO
+PACBTUNA
+SBT (Done)
+SKJCIO
+SKJCWPAC
+SKJEATL
+SKJEPAC
+SKJWATL
+YFINATL
+YFINCWPAC
+YFINEIO
+YFINEPAC
+
+## MASTER DF GOES HERE 
+
+```{r}
+tuna_catch <- data.frame(sbt_combined) %>% 
+  bind_rows(albamed_combined)
+```
+
+
+## MASTER GRAPH GOES HERE
+
+```{r}
+ggplot(tuna_catch, aes(x = year, y = catch, fill = stockid)) +
+  geom_area()
+```
+
+
+## SBT Catch (RAM + New)
+
+```{r}
+
+sbt_ram <- read_csv(here("data", "sbt_timeseries_2016.csv")) %>% 
+  select(stockid, year, TCbest) %>% 
+  rename(catch = TCbest)
+
+# create dataframe of new catch values 
+new_yr_sbt <- c(2017:2020)
+new_tc_sbt <- c(13700,17100,16900,16441)
+
+new_catch_sbt <- data.frame(new_yr_sbt, new_tc_sbt) %>%
+  rename(year = new_yr_sbt,
+         catch = new_tc_sbt) 
+
+#Bind the new rows
+sbt_combined <- bind_rows(sbt_ram, new_catch_sbt) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  replace_na(list(stockid = "SBT"))
+
+# Now have SBT catch through 2020 
+
+```
+
+## ALBAMED Catch
+
+```{r}
+albamed_catch <- read_csv(here("data", "albamed_catch.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  select(year, catch) 
+
+albamed_stock_code <- c("ALBAMED")
+
+albamed_combined <- cbind(albamed_stock_code, albamed_catch) %>% 
+  rename(stockid = albamed_stock_code)
+  
+```
+
+
