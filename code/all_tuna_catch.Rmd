@@ -15,7 +15,7 @@ library(here)
 
 ## List of all Tuna stocks 
 
-ALBAIO 
+ALBAIO (Done)
 ALBAMED (Done)
 ALBANATL
 ALBANPAC (Done)
@@ -42,8 +42,12 @@ YFINEPAC
 ## MASTER DF GOES HERE 
 
 ```{r}
+
+# Run all chunks below before this 
+
 tuna_catch <- data.frame(sbt_combined) %>% 
-  bind_rows(albamed_combined,
+  bind_rows(albaio_combined,
+            albamed_combined,
             albanpac_combined,
             albaspac_combined)
   
@@ -84,6 +88,20 @@ sbt_combined <- bind_rows(sbt_ram, new_catch_sbt) %>%
 # Now have SBT catch through 2020 
 
 ```
+
+## ALBAIO Catch
+
+```{r}
+albaio_catch <- read_csv(here("data", "albaio_catch.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  select(year, catch) 
+
+albaio_stock_code <- c("ALBAIO")
+
+albaio_combined <- cbind(albaio_stock_code, albaio_catch) %>% 
+  rename(stockid = albaio_stock_code)
+```
+
 
 ## ALBAMED Catch
 
