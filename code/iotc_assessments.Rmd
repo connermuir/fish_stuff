@@ -1,0 +1,41 @@
+---
+title: "IOTC Assessments"
+author: "Conner Smith"
+date: "6/14/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(here)
+library(tidyverse)
+
+load(here("data", "DBdata[asmt][v4.495].RData"))
+```
+
+## ALBAIO
+
+```{r setup, include=FALSE}
+# RAM datasets to use
+ram_datasets <- c('timeseries_values_views', 'stock', 'area', 'bioparams', 'timeseries_assessments_views',
+                  'bioparams_values_views', 'assessor', 'management', 'assessment')
+# Remove all unneccessary RAM data
+rm(list = c(ls()[!(ls() %in% ram_datasets)]))
+
+# Extract main RAM timeseries, with BdivBmsypref and UdivUmsypref
+albaio.ram.ts <- timeseries_values_views %>%
+  tbl_df() %>%
+  select(stockid, stocklong, year, UdivUmsypref, TBbest, TBdivTBmsy, BdivBmsypref, TAC, TCbest, ERbest, SSB, F, FdivFmsy, ) %>% #These are some of the metrics of interest, but this can be changed to select more if needed.
+  left_join(tbl_df(stock),by = c("stockid", "stocklong")) %>%
+  left_join(tbl_df(area), by = "areaid") %>%
+  select(-inmyersdb, -myersstockid, -alternateareaname) %>% 
+  filter(scientificname == "Thunnus alalunga",
+         areaid == "multinational-IOTC-IO") %>% #We are only interested in "country == multinational", so removing the two countries that have pelagic stock assessments that are not multinational.
+  select(stockid:FdivFmsy, country)
+   #Not one of the RFMOs we're interested in, so removing it.
+
+albaio.ram.dbase <- albaio.ram.ts 
+
+write_csv(albaio.ram.dbase, "albaio_timeseries_2016.csv")
+```
