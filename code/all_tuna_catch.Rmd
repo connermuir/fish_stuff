@@ -18,9 +18,9 @@ library(here)
 ALBAIO 
 ALBAMED (Done)
 ALBANATL
-ALBANPAC
+ALBANPAC (Done)
 ALBASATL
-ALBASPAC
+ALBASPAC (Done)
 ATBTUNAEATL
 ATBTUNAWATL
 BIGEYEATL
@@ -43,7 +43,10 @@ YFINEPAC
 
 ```{r}
 tuna_catch <- data.frame(sbt_combined) %>% 
-  bind_rows(albamed_combined)
+  bind_rows(albamed_combined,
+            albanpac_combined,
+            albaspac_combined)
+  
 ```
 
 
@@ -51,7 +54,9 @@ tuna_catch <- data.frame(sbt_combined) %>%
 
 ```{r}
 ggplot(tuna_catch, aes(x = year, y = catch, fill = stockid)) +
-  geom_area()
+  geom_area() +
+  labs(x = "Year", y = "Catch (metric tonnes)") +
+  theme_minimal()
 ```
 
 
@@ -94,4 +99,24 @@ albamed_combined <- cbind(albamed_stock_code, albamed_catch) %>%
   
 ```
 
+## ALBANPAC Catch
+
+```{r}
+albanpac_catch <- read_csv(here("data", "albanpac_catch.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  select(year, catch) 
+
+albanpac_stock_code <- c("ALBANPAC")
+
+albanpac_combined <- cbind(albanpac_stock_code, albanpac_catch) %>% 
+  rename(stockid = albanpac_stock_code)
+  
+```
+
+# ALBASPAC Catch
+
+```{r}
+albaspac_combined <- read_csv(here("data", "albaspac_catch.csv")) %>% 
+  filter(year %in% c(1950:2020))
+```
 
