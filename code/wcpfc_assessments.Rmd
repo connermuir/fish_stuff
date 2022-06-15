@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 library(here)
 library(tidyverse)
-library
+library(janitor)
 
 load(here("data", "DBdata[asmt][v4.495].RData"))
 ```
@@ -22,9 +22,13 @@ spac_catch <- read_csv(here("data", "XLS_SouthPacific.csv")) %>%
   clean_names()
 
 albaspac_catch <- spac_catch %>% 
-  group_by(yy, sp_code) %>% 
+  group_by(sp_code, yy) %>% 
   filter(sp_code == "ALB") %>% 
-  summarize(catch = sum(sp_mt))
+  summarize(catch = sum(sp_mt)) %>% 
+  rename(year = yy,
+         stockid = sp_code) %>% 
+  mutate(stockid = case_when(stockid == "ALB" ~ "ALBASPAC"))
+ 
 
 write_csv(albaspac_catch, "/Users/conne/Documents/Fisheries/fish_stuff/data/albaspac_catch.csv")
   
