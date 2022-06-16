@@ -60,3 +60,22 @@ albaspac.ram.dbase <- albaspac.ram.ts
 
 write_csv(albaspac.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/albaspac_timeseries_2015.csv")
 ```
+
+
+## BIGEYECWPAC Catch Calculations From Yearbook 
+
+```{r}
+
+bigeyecwpac_catch <- read_csv(here("data", "XLS_WCPO.csv")) %>% 
+  clean_names()
+
+bigeyecwpac_catch <- bigeyecwpac_catch %>% 
+  group_by(sp_code, yy) %>% 
+  filter(sp_code == "ALB") %>% 
+  summarize(catch = sum(sp_mt)) %>% 
+  rename(year = yy,
+         stockid = sp_code) %>% 
+  mutate(stockid = case_when(stockid == "ALB" ~ "ALBASPAC"))
+ 
+
+write_csv(albaspac_catch, "/Users/conne/Documents/Fisheries/fish_stuff/data/albaspac_catch.csv")

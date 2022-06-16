@@ -17,16 +17,16 @@ library(here)
 
 ALBAIO (Done)
 ALBAMED (Done)
-ALBANATL
+ALBANATL (Done)
 ALBANPAC (Done)
-ALBASATL
+ALBASATL (Done)
 ALBASPAC (Done)
 ATBTUNAEATL
 ATBTUNAWATL
-BIGEYEATL
-BIGEYECWPAC
-BIGEYEEPAC
-BIGEYEIO
+BIGEYEATL (Done)
+BIGEYECWPAC (Done)
+BIGEYEEPAC (Done)
+BIGEYEIO (Done)
 PACBTUNA
 SBT (Done)
 SKJCIO
@@ -38,30 +38,6 @@ YFINATL
 YFINCWPAC
 YFINEIO
 YFINEPAC
-
-## MASTER DF GOES HERE 
-
-```{r}
-
-# Run all chunks below before this 
-
-tuna_catch <- data.frame(sbt_combined) %>% 
-  bind_rows(albaio_combined,
-            albamed_combined,
-            albanpac_combined,
-            albaspac_combined)
-  
-```
-
-
-## MASTER GRAPH GOES HERE
-
-```{r}
-ggplot(tuna_catch, aes(x = year, y = catch, fill = stockid)) +
-  geom_area() +
-  labs(x = "Year", y = "Catch (metric tonnes)") +
-  theme_minimal()
-```
 
 
 ## SBT Catch (RAM + New)
@@ -116,6 +92,21 @@ albamed_combined <- cbind(albamed_stock_code, albamed_catch) %>%
   rename(stockid = albamed_stock_code)
   
 ```
+## ALBANATL (Ends in 2016)
+
+```{r}
+albanatl_combined <- read_csv(here("data", "albanatl_catch.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  rename(catch = TCbest)
+```
+
+## ALBASATL (Ends in 2016)
+
+```{r}
+albasatl_combined <- read_csv(here("data", "albasatl_catch.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  rename(catch = TCbest)
+```
 
 ## ALBANPAC Catch
 
@@ -138,3 +129,63 @@ albaspac_combined <- read_csv(here("data", "albaspac_catch.csv")) %>%
   filter(year %in% c(1950:2020))
 ```
 
+## BIGEYEATL
+
+```{r}
+bigeyeatl_combined <- read_csv(here("data", "bigeyeatl_catch.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  rename(catch = TCbest)
+```
+
+## BIGEYECWPAC
+
+```{r}
+bigeyecwpac_combined <- read_csv(here("data", "bigeyecwpac_catch.csv")) %>% 
+  filter(year %in% c(1950:2020))
+```
+## BIGEYEEPAC (Ends in 2016)
+
+```{r}
+bigeyeepac_combined <- read_csv(here("data", "bigeyeepac_catch.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  rename(catch = TCbest) 
+```
+
+## BIGEYEIO
+
+```{r}
+bigeyeio_combined <- read_csv(here("data", "bigeyeio_catch.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  select(stockid, year, catch) 
+```
+
+
+## MASTER DF GOES HERE 
+
+```{r}
+
+# Run all chunks below before this 
+
+tuna_catch <- data.frame(sbt_combined) %>% 
+  bind_rows(albaio_combined,
+            albamed_combined,
+            albanatl_combined,
+            albasatl_combined,
+            albanpac_combined,
+            albaspac_combined,
+            bigeyeatl_combined,
+            bigeyecwpac_combined,
+            bigeyeepac_combined,
+            bigeyeio_combined)
+  
+```
+
+
+## MASTER GRAPH GOES HERE
+
+```{r}
+ggplot(tuna_catch, aes(x = year, y = catch, fill = stockid)) +
+  geom_area() +
+  labs(x = "Year", y = "Catch (metric tonnes)") +
+  theme_minimal()
+```
