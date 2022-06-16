@@ -21,15 +21,15 @@ ALBANATL (Done)
 ALBANPAC (Done)
 ALBASATL (Done)
 ALBASPAC (Done)
-ATBTUNAEATL
-ATBTUNAWATL
+ATBTUNAEATL (Done)
+*ATBTUNAWATL (HOLD?)*
 BIGEYEATL (Done)
 BIGEYECWPAC (Done)
 BIGEYEEPAC (Done)
 BIGEYEIO (Done)
-PACBTUNA
+PACBTUNA (Done)
 SBT (Done)
-SKJCIO
+SKJCIO (Done)
 SKJCWPAC
 SKJEATL
 SKJEPAC
@@ -129,6 +129,14 @@ albaspac_combined <- read_csv(here("data", "albaspac_catch.csv")) %>%
   filter(year %in% c(1950:2020))
 ```
 
+## ATBTUNAEATL
+
+```{r}
+atbtunaeatl_combined <- read_csv(here("data", "atbtunaeatl_catch.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  rename(catch = TCbest)
+```
+
 ## BIGEYEATL
 
 ```{r}
@@ -159,6 +167,20 @@ bigeyeio_combined <- read_csv(here("data", "bigeyeio_catch.csv")) %>%
   select(stockid, year, catch) 
 ```
 
+## PACBTUNA
+
+```{r}
+pacbtuna_combined <- read_csv(here("data", "pacbtuna_catch.csv")) %>% 
+  filter(year %in% c(1950:2020))
+```
+
+## SKJCIO 
+
+```{r}
+skjcio_combined <- read_csv(here("data", "skjcio_catch.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  select(stockid, year, catch) 
+```
 
 ## MASTER DF GOES HERE 
 
@@ -173,10 +195,13 @@ tuna_catch <- data.frame(sbt_combined) %>%
             albasatl_combined,
             albanpac_combined,
             albaspac_combined,
+            atbtunaeatl_combined,
             bigeyeatl_combined,
             bigeyecwpac_combined,
             bigeyeepac_combined,
-            bigeyeio_combined)
+            bigeyeio_combined,
+            pacbtuna_combined,
+            skjcio_combined)
   
 ```
 
