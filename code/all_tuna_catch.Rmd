@@ -30,10 +30,10 @@ BIGEYEIO (Done)
 PACBTUNA (Done)
 SBT (Done)
 SKJCIO (Done)
-SKJCWPAC
-SKJEATL
-SKJEPAC
-SKJWATL
+SKJCWPAC (Done)
+SKJEATL (NOT ASSESSED)
+SKJEPAC (NOT ASSESSED)
+SKJWATL (Done)
 YFINATL
 YFINCWPAC
 YFINEIO
@@ -92,6 +92,7 @@ albamed_combined <- cbind(albamed_stock_code, albamed_catch) %>%
   rename(stockid = albamed_stock_code)
   
 ```
+
 ## ALBANATL (Ends in 2016)
 
 ```{r}
@@ -182,6 +183,58 @@ skjcio_combined <- read_csv(here("data", "skjcio_catch.csv")) %>%
   select(stockid, year, catch) 
 ```
 
+## SKJCWPAC
+
+```{r}
+skjcwpac_combined <- read_csv(here("data", "skjcwpac_catch.csv")) %>% 
+  filter(year %in% c(1950:2020))
+```
+
+## SKJEATL (NOT ASSESSED)
+
+## SKJEPAC (NOT ASSESSED)
+
+## SKJWATL
+
+```{r}
+skjwatl_combined <- read_csv(here("data", "skjwatl_catch.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  rename(catch = TCbest) 
+```
+
+## YFINATL
+
+```{r}
+yfinatl_combined <- read_csv(here("data", "yfinatl_catch.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  rename(catch = TCbest) 
+```
+
+## YFINCWPAC
+
+```{r}
+yfincwpac_combined <- read_csv(here("data", "yfincwpac_catch.csv")) %>% 
+  filter(year %in% c(1950:2020))
+```
+
+
+## YFINEIO
+
+```{r}
+yfineio_combined <- read_csv(here("data", "yfineio_catch.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  select(stockid, year, catch) 
+```
+
+## YFINEPAC
+
+```{r}
+yfinepac_combined <- read_csv(here("data", "yfinepac_catch.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  rename(catch = TCbest) 
+```
+
+
 ## MASTER DF GOES HERE 
 
 ```{r}
@@ -201,7 +254,13 @@ tuna_catch <- data.frame(sbt_combined) %>%
             bigeyeepac_combined,
             bigeyeio_combined,
             pacbtuna_combined,
-            skjcio_combined)
+            skjcio_combined,
+            skjcwpac_combined,
+            skjwatl_combined,
+            yfinatl_combined,
+            yfincwpac_combined,
+            yfineio_combined,
+            yfinepac_combined)
   
 ```
 
