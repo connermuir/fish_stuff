@@ -1,0 +1,73 @@
+---
+title: "Billfish Catch"
+author: "Conner Smith"
+date: "6/22/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(here)
+
+```
+
+## List of all Billfish stocks
+
+BLKMARLINIO (Done)
+BMARLINATL
+BMARLINIO
+BMARLINPAC
+IPSAILIO
+SAILEATL
+SAILWATL
+STMARLINIO
+STMARLINNEPAC
+STMARLINSWPO
+STMARLINWCNPAC
+SWORDEPAC
+SWORDIO
+SWORDMED
+SWORDNATL
+SWORDNPAC
+SWORDSATL
+SWORDSPAC
+SWORDWCNPAC
+WMARLINATL
+
+## BLKMARLINIO
+
+```{r}
+blkmarlinio_combined <- read_csv(here("data", "blkmarlinio_catch.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  select(stockid, year, catch) 
+```
+
+
+## MASTER DF GOES HERE 
+
+```{r}
+
+# Run all chunks below before this 
+
+bill_catch <- data.frame(blkmarlinio_combined) %>% 
+  bind_rows(albaio_combined,
+            albamed_combined,
+            albanatl_combined,
+            albasatl_combined,
+            albanpac_combined,
+            albaspac_combined,
+            atbtunaeatl_combined)
+  
+```
+
+
+## MASTER GRAPH GOES HERE
+
+```{r}
+ggplot(bill_catch, aes(x = year, y = catch, fill = stockid)) +
+  geom_area() +
+  labs(x = "Year", y = "Catch (metric tonnes)") +
+  theme_minimal()
+```
