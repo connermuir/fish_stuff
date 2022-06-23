@@ -166,3 +166,22 @@ yfincwpac.ram.dbase <- yfincwpac.ram.ts
 write_csv(yfincwpac.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/yfincwpac_timeseries_2015.csv")
 ```
 
+## STMARLINSWPO (catch only)
+
+```{r}
+stmarlinswpo_catch <- read_csv(here("data", "XLS_WCPFC.csv")) %>% 
+  clean_names()
+
+stmarlinswpo_catch <- stmarlinswpo_catch %>% 
+  group_by(sp_code, yy) %>% 
+  filter(sp_code == "MLS") %>% 
+  summarize(catch = sum(sp_mt)) %>% 
+  rename(year = yy,
+         stockid = sp_code) %>% 
+  mutate(stockid = case_when(stockid == "MLS" ~ "STMARLINSWPO"))
+ 
+
+write_csv(stmarlinswpo_catch, "/Users/conne/Documents/Fisheries/fish_stuff/data/stmarlinswpo_catch.csv")
+```
+
+

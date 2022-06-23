@@ -16,16 +16,16 @@ library(here)
 ## List of all Billfish stocks
 
 BLKMARLINIO (Done)
-BMARLINATL
-BMARLINIO
-BMARLINPAC
-IPSAILIO
-SAILEATL
-SAILWATL
-STMARLINIO
-STMARLINNEPAC
-STMARLINSWPO
-STMARLINWCNPAC
+BMARLINATL (Done)
+BMARLINIO (Done)
+BMARLINPAC (Done)
+IPSAILIO (Done)
+SAILEATL (Done)
+SAILWATL (Done)
+STMARLINIO (Done)
+STMARLINNEPAC (Done)
+STMARLINSWPO (Done)
+STMARLINWCNPAC (Done)
 SWORDEPAC
 SWORDIO
 SWORDMED
@@ -44,6 +44,86 @@ blkmarlinio_combined <- read_csv(here("data", "blkmarlinio_catch.csv")) %>%
   select(stockid, year, catch) 
 ```
 
+## BMARLINATL
+
+```{r}
+bmarlinatl_combined <- read_csv(here("data", "bmarlinatl_catch.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  rename(catch = TCbest)
+```
+
+##BMARLINIO
+
+```{r}
+bmarlinio_combined <- read_csv(here("data", "bmarlinio_catch.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  select(stockid, year, catch) 
+```
+
+## BMARLINPAC 
+
+```{r}
+bmarlinpac_combined <- read_csv(here("data", "bmarlinpac_catch.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  select(stockid, year, catch)
+```
+
+## IPSAILIO
+
+```{r}
+ipsailio_combined <- read_csv(here("data", "ipsailio_catch.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  select(stockid, year, catch)
+```
+
+## SAILEATL
+
+```{r}
+saileatl_combined <- read_csv(here("data", "saileatl_catch.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  rename(catch = TCbest)
+```
+
+
+## SAILWATL
+
+```{r}
+sailwatl_combined <- read_csv(here("data", "sailwatl_catch.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  rename(catch = TCbest)
+```
+
+## STMARLINIO (no update)
+
+```{r}
+stmarlinio_combined <- read_csv(here("data", "stmarlinio_catch.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  rename(catch = TCbest)
+```
+
+## STMARLINNEPAC
+
+```{r}
+stmarlinnepac_combined <- read_csv(here("data", "stmarlinnepac_catch.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  rename(catch = TCbest)
+```
+
+## STMARLINSWPO
+
+```{r}
+stmarlinswpo_combined <- read_csv(here("data", "stmarlinswpo_catch.csv")) %>% 
+  filter(year %in% c(1950:2020))
+```
+
+## STMARLINWCNPAC
+
+```{r}
+stmarlinwcnpac_combined <- read_csv(here("data", "stmarlinwcnpac_catch.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  rename(catch = TCbest)
+```
+
 
 ## MASTER DF GOES HERE 
 
@@ -52,13 +132,16 @@ blkmarlinio_combined <- read_csv(here("data", "blkmarlinio_catch.csv")) %>%
 # Run all chunks below before this 
 
 bill_catch <- data.frame(blkmarlinio_combined) %>% 
-  bind_rows(albaio_combined,
-            albamed_combined,
-            albanatl_combined,
-            albasatl_combined,
-            albanpac_combined,
-            albaspac_combined,
-            atbtunaeatl_combined)
+  bind_rows(bmarlinatl_combined,
+            bmarlinio_combined,
+            bmarlinpac_combined,
+            ipsailio_combined,
+            saileatl_combined,
+            sailwatl_combined,
+            stmarlinio_combined,
+            stmarlinnepac_combined,
+            stmarlinswpo_combined,
+            stmarlinwcnpac_combined)
   
 ```
 
