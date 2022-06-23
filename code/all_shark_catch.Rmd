@@ -1,0 +1,68 @@
+---
+title: "Shark Catch"
+author: "Conner Smith"
+date: "6/23/2022"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+library(tidyverse)
+library(here)
+
+```
+
+## List of all Shark stocks
+
+BLSHARIO (Done)
+BLSHARNATL
+BLSHARNPAC
+BLSHARSATL
+OWTSHARCWPAC
+PORSHARNEATL
+PORSHARNWATL
+PORSHARSWATL
+SFMAKONATL
+SFMAKONPAC
+SFMAKONWPAC
+SFMAKOSATL
+SILSHARCWPAC
+
+
+## BLSHARIO
+
+```{r}
+blshario_combined <- read_csv(here("data", "shark", "blshario_catch.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  select(stockid, year, catch) 
+```
+
+## 
+
+```{r}
+bmarlinatl_combined <- read_csv(here("data", "bmarlinatl_catch.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  rename(catch = TCbest)
+```
+
+## MASTER DF GOES HERE 
+
+```{r}
+
+# Run all chunks below before this 
+
+shark_catch <- data.frame(blshario_combined)
+  
+```
+
+
+## MASTER GRAPH GOES HERE
+
+```{r}
+ggplot(shark_catch, aes(x = year, y = catch, fill = stockid)) +
+  geom_area() +
+  labs(x = "Year", y = "Catch (metric tonnes)") +
+  theme_minimal()
+```

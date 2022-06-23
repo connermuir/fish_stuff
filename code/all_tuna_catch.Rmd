@@ -44,7 +44,7 @@ YFINEPAC
 
 ```{r}
 
-sbt_ram <- read_csv(here("data", "sbt_timeseries_2016.csv")) %>% 
+sbt_ram <- read_csv(here("data", "tuna", "sbt_timeseries_2016.csv")) %>% 
   select(stockid, year, TCbest) %>% 
   rename(catch = TCbest)
 
@@ -68,7 +68,7 @@ sbt_combined <- bind_rows(sbt_ram, new_catch_sbt) %>%
 ## ALBAIO Catch
 
 ```{r}
-albaio_catch <- read_csv(here("data", "albaio_catch.csv")) %>% 
+albaio_catch <- read_csv(here("data", "tuna", "albaio_catch.csv")) %>% 
   filter(year %in% c(1950:2020)) %>% 
   select(year, catch) 
 
@@ -82,7 +82,7 @@ albaio_combined <- cbind(albaio_stock_code, albaio_catch) %>%
 ## ALBAMED Catch
 
 ```{r}
-albamed_catch <- read_csv(here("data", "albamed_catch.csv")) %>% 
+albamed_catch <- read_csv(here("data", "tuna", "albamed_catch.csv")) %>% 
   filter(year %in% c(1950:2020)) %>% 
   select(year, catch) 
 
@@ -96,7 +96,7 @@ albamed_combined <- cbind(albamed_stock_code, albamed_catch) %>%
 ## ALBANATL (Ends in 2016)
 
 ```{r}
-albanatl_combined <- read_csv(here("data", "albanatl_catch.csv")) %>% 
+albanatl_combined <- read_csv(here("data", "tuna", "albanatl_catch.csv")) %>% 
   filter(year %in% c(1950:2020)) %>% 
   rename(catch = TCbest)
 ```
@@ -104,7 +104,7 @@ albanatl_combined <- read_csv(here("data", "albanatl_catch.csv")) %>%
 ## ALBASATL (Ends in 2016)
 
 ```{r}
-albasatl_combined <- read_csv(here("data", "albasatl_catch.csv")) %>% 
+albasatl_combined <- read_csv(here("data", "tuna", "albasatl_catch.csv")) %>% 
   filter(year %in% c(1950:2020)) %>% 
   rename(catch = TCbest)
 ```
@@ -112,7 +112,7 @@ albasatl_combined <- read_csv(here("data", "albasatl_catch.csv")) %>%
 ## ALBANPAC Catch
 
 ```{r}
-albanpac_catch <- read_csv(here("data", "albanpac_catch.csv")) %>% 
+albanpac_catch <- read_csv(here("data", "tuna", "albanpac_catch.csv")) %>% 
   filter(year %in% c(1950:2020)) %>% 
   select(year, catch) 
 
@@ -126,14 +126,14 @@ albanpac_combined <- cbind(albanpac_stock_code, albanpac_catch) %>%
 # ALBASPAC Catch
 
 ```{r}
-albaspac_combined <- read_csv(here("data", "albaspac_catch.csv")) %>% 
+albaspac_combined <- read_csv(here("data", "tuna", "albaspac_catch.csv")) %>% 
   filter(year %in% c(1950:2020))
 ```
 
 ## ATBTUNAEATL
 
 ```{r}
-atbtunaeatl_combined <- read_csv(here("data", "atbtunaeatl_catch.csv")) %>% 
+atbtunaeatl_combined <- read_csv(here("data", "tuna", "atbtunaeatl_catch.csv")) %>% 
   filter(year %in% c(1950:2020)) %>% 
   rename(catch = TCbest)
 ```
@@ -141,7 +141,7 @@ atbtunaeatl_combined <- read_csv(here("data", "atbtunaeatl_catch.csv")) %>%
 ## BIGEYEATL
 
 ```{r}
-bigeyeatl_combined <- read_csv(here("data", "bigeyeatl_catch.csv")) %>% 
+bigeyeatl_combined <- read_csv(here("data", "tuna", "bigeyeatl_catch.csv")) %>% 
   filter(year %in% c(1950:2020)) %>% 
   rename(catch = TCbest)
 ```
@@ -149,13 +149,13 @@ bigeyeatl_combined <- read_csv(here("data", "bigeyeatl_catch.csv")) %>%
 ## BIGEYECWPAC
 
 ```{r}
-bigeyecwpac_combined <- read_csv(here("data", "bigeyecwpac_catch.csv")) %>% 
+bigeyecwpac_combined <- read_csv(here("data", "tuna", "bigeyecwpac_catch.csv")) %>% 
   filter(year %in% c(1950:2020))
 ```
 ## BIGEYEEPAC (Ends in 2016)
 
 ```{r}
-bigeyeepac_combined <- read_csv(here("data", "bigeyeepac_catch.csv")) %>% 
+bigeyeepac_combined <- read_csv(here("data", "tuna", "bigeyeepac_catch.csv")) %>% 
   filter(year %in% c(1950:2020)) %>% 
   rename(catch = TCbest) 
 ```
@@ -163,7 +163,7 @@ bigeyeepac_combined <- read_csv(here("data", "bigeyeepac_catch.csv")) %>%
 ## BIGEYEIO
 
 ```{r}
-bigeyeio_combined <- read_csv(here("data", "bigeyeio_catch.csv")) %>% 
+bigeyeio_combined <- read_csv(here("data", "tuna", "bigeyeio_catch.csv")) %>% 
   filter(year %in% c(1950:2020)) %>% 
   select(stockid, year, catch) 
 ```
@@ -171,14 +171,14 @@ bigeyeio_combined <- read_csv(here("data", "bigeyeio_catch.csv")) %>%
 ## PACBTUNA
 
 ```{r}
-pacbtuna_combined <- read_csv(here("data", "pacbtuna_catch.csv")) %>% 
+pacbtuna_combined <- read_csv(here("data", "tuna", "pacbtuna_catch.csv")) %>% 
   filter(year %in% c(1950:2020))
 ```
 
 ## SKJCIO 
 
 ```{r}
-skjcio_combined <- read_csv(here("data", "skjcio_catch.csv")) %>% 
+skjcio_combined <- read_csv(here("data", "tuna", "skjcio_catch.csv")) %>% 
   filter(year %in% c(1950:2020)) %>% 
   select(stockid, year, catch) 
 ```
@@ -186,7 +186,7 @@ skjcio_combined <- read_csv(here("data", "skjcio_catch.csv")) %>%
 ## SKJCWPAC
 
 ```{r}
-skjcwpac_combined <- read_csv(here("data", "skjcwpac_catch.csv")) %>% 
+skjcwpac_combined <- read_csv(here("data", "tuna", "skjcwpac_catch.csv")) %>% 
   filter(year %in% c(1950:2020))
 ```
 
@@ -197,7 +197,7 @@ skjcwpac_combined <- read_csv(here("data", "skjcwpac_catch.csv")) %>%
 ## SKJWATL
 
 ```{r}
-skjwatl_combined <- read_csv(here("data", "skjwatl_catch.csv")) %>% 
+skjwatl_combined <- read_csv(here("data", "tuna", "skjwatl_catch.csv")) %>% 
   filter(year %in% c(1950:2020)) %>% 
   rename(catch = TCbest) 
 ```
@@ -205,7 +205,7 @@ skjwatl_combined <- read_csv(here("data", "skjwatl_catch.csv")) %>%
 ## YFINATL
 
 ```{r}
-yfinatl_combined <- read_csv(here("data", "yfinatl_catch.csv")) %>% 
+yfinatl_combined <- read_csv(here("data", "tuna", "yfinatl_catch.csv")) %>% 
   filter(year %in% c(1950:2020)) %>% 
   rename(catch = TCbest) 
 ```
@@ -213,7 +213,7 @@ yfinatl_combined <- read_csv(here("data", "yfinatl_catch.csv")) %>%
 ## YFINCWPAC
 
 ```{r}
-yfincwpac_combined <- read_csv(here("data", "yfincwpac_catch.csv")) %>% 
+yfincwpac_combined <- read_csv(here("data", "tuna", "yfincwpac_catch.csv")) %>% 
   filter(year %in% c(1950:2020))
 ```
 
@@ -221,7 +221,7 @@ yfincwpac_combined <- read_csv(here("data", "yfincwpac_catch.csv")) %>%
 ## YFINEIO
 
 ```{r}
-yfineio_combined <- read_csv(here("data", "yfineio_catch.csv")) %>% 
+yfineio_combined <- read_csv(here("data", "tuna", "yfineio_catch.csv")) %>% 
   filter(year %in% c(1950:2020)) %>% 
   select(stockid, year, catch) 
 ```
@@ -229,7 +229,7 @@ yfineio_combined <- read_csv(here("data", "yfineio_catch.csv")) %>%
 ## YFINEPAC
 
 ```{r}
-yfinepac_combined <- read_csv(here("data", "yfinepac_catch.csv")) %>% 
+yfinepac_combined <- read_csv(here("data", "tuna", "yfinepac_catch.csv")) %>% 
   filter(year %in% c(1950:2020)) %>% 
   rename(catch = TCbest) 
 ```
