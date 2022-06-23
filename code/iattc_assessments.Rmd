@@ -43,12 +43,6 @@ write_csv(bigeyeepac.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/dat
 ## YFINEPAC 
 
 ```{r}
-# RAM datasets to use
-ram_datasets <- c('timeseries_values_views', 'stock', 'area', 'bioparams', 'timeseries_assessments_views',
-                  'bioparams_values_views', 'assessor', 'management', 'assessment')
-# Remove all unneccessary RAM data
-rm(list = c(ls()[!(ls() %in% ram_datasets)]))
-
 # Extract main RAM timeseries, with BdivBmsypref and UdivUmsypref
 yfinepac.ram.ts <- timeseries_values_views %>%
   tbl_df() %>%
@@ -68,7 +62,6 @@ write_csv(yfinepac.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/
 ## STMARLINNEPAC (no update)
 
 ```{r}
-
 # Extract main RAM timeseries, with BdivBmsypref and UdivUmsypref
 stmarlinnepac.ram.ts <- timeseries_values_views %>%
   tbl_df() %>%
@@ -90,7 +83,6 @@ write_csv(stmarlinnepac.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/
 ## STMARLINWCNPAC (no update)
 
 ```{r}
-
 # Extract main RAM timeseries, with BdivBmsypref and UdivUmsypref
 stmarlinwcnpac.ram.ts <- timeseries_values_views %>%
   tbl_df() %>%

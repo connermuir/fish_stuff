@@ -44,12 +44,6 @@ write_csv(albanatl.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/
 ## ATBTUNAEATL (no update, just pulling catch)
 
 ```{r setup, include=FALSE}
-# RAM datasets to use
-ram_datasets <- c('timeseries_values_views', 'stock', 'area', 'bioparams', 'timeseries_assessments_views',
-                  'bioparams_values_views', 'assessor', 'management', 'assessment')
-# Remove all unneccessary RAM data
-rm(list = c(ls()[!(ls() %in% ram_datasets)]))
-
 # Extract main RAM timeseries, with BdivBmsypref and UdivUmsypref
 atbtunaeatl.ram.ts <- timeseries_values_views %>%
   tbl_df() %>%
@@ -69,12 +63,6 @@ write_csv(atbtunaeatl.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/da
 ## ALBASATL (no update, just pulling catch)
 
 ```{r setup, include=FALSE}
-# RAM datasets to use
-ram_datasets <- c('timeseries_values_views', 'stock', 'area', 'bioparams', 'timeseries_assessments_views',
-                  'bioparams_values_views', 'assessor', 'management', 'assessment')
-# Remove all unneccessary RAM data
-rm(list = c(ls()[!(ls() %in% ram_datasets)]))
-
 # Extract main RAM timeseries, with BdivBmsypref and UdivUmsypref
 albasatl.ram.ts <- timeseries_values_views %>%
   tbl_df() %>%
@@ -93,12 +81,6 @@ write_csv(albasatl.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/
 
 ## BIGEYEATL (no update, just pulling catch)
 ```{r setup, include=FALSE}
-# RAM datasets to use
-ram_datasets <- c('timeseries_values_views', 'stock', 'area', 'bioparams', 'timeseries_assessments_views',
-                  'bioparams_values_views', 'assessor', 'management', 'assessment')
-# Remove all unneccessary RAM data
-rm(list = c(ls()[!(ls() %in% ram_datasets)]))
-
 # Extract main RAM timeseries, with BdivBmsypref and UdivUmsypref
 bigeyeatl.ram.ts <- timeseries_values_views %>%
   tbl_df() %>%
@@ -118,12 +100,6 @@ write_csv(bigeyeatl.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data
 ## SKJCWATL (ENDS IN 2013)
 
 ```{r}
-# RAM datasets to use
-ram_datasets <- c('timeseries_values_views', 'stock', 'area', 'bioparams', 'timeseries_assessments_views',
-                  'bioparams_values_views', 'assessor', 'management', 'assessment')
-# Remove all unneccessary RAM data
-rm(list = c(ls()[!(ls() %in% ram_datasets)]))
-
 # Extract main RAM timeseries, with BdivBmsypref and UdivUmsypref
 skjwatl.ram.ts <- timeseries_values_views %>%
   tbl_df() %>%
@@ -143,12 +119,6 @@ write_csv(skjwatl.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/s
 ## YFINATL (Ends in 2016)
 
 ```{r}
-# RAM datasets to use
-ram_datasets <- c('timeseries_values_views', 'stock', 'area', 'bioparams', 'timeseries_assessments_views',
-                  'bioparams_values_views', 'assessor', 'management', 'assessment')
-# Remove all unneccessary RAM data
-rm(list = c(ls()[!(ls() %in% ram_datasets)]))
-
 # Extract main RAM timeseries, with BdivBmsypref and UdivUmsypref
 yfinatl.ram.ts <- timeseries_values_views %>%
   tbl_df() %>%
@@ -168,12 +138,6 @@ write_csv(yfinatl.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/y
 ## BMARLINATL (no update)
 
 ```{r}
-# RAM datasets to use
-ram_datasets <- c('timeseries_values_views', 'stock', 'area', 'bioparams', 'timeseries_assessments_views',
-                  'bioparams_values_views', 'assessor', 'management', 'assessment')
-# Remove all unneccessary RAM data
-rm(list = c(ls()[!(ls() %in% ram_datasets)]))
-
 # Extract main RAM timeseries, with BdivBmsypref and UdivUmsypref
 bmarlinatl.ram.ts <- timeseries_values_views %>%
   tbl_df() %>%
@@ -194,12 +158,6 @@ write_csv(bmarlinatl.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/dat
 ## SAILEATL (no update)
 
 ```{r}
-# RAM datasets to use
-ram_datasets <- c('timeseries_values_views', 'stock', 'area', 'bioparams', 'timeseries_assessments_views',
-                  'bioparams_values_views', 'assessor', 'management', 'assessment')
-# Remove all unneccessary RAM data
-rm(list = c(ls()[!(ls() %in% ram_datasets)]))
-
 # Extract main RAM timeseries, with BdivBmsypref and UdivUmsypref
 saileatl.ram.ts <- timeseries_values_views %>%
   tbl_df() %>%

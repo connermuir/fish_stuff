@@ -43,12 +43,6 @@ write_csv(albaio.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/al
 ## BIGEYEIO
 
 ```{r setup, include=FALSE}
-# RAM datasets to use
-ram_datasets <- c('timeseries_values_views', 'stock', 'area', 'bioparams', 'timeseries_assessments_views',
-                  'bioparams_values_views', 'assessor', 'management', 'assessment')
-# Remove all unneccessary RAM data
-rm(list = c(ls()[!(ls() %in% ram_datasets)]))
-
 # Extract main RAM timeseries, with BdivBmsypref and UdivUmsypref
 bigeyeio.ram.ts <- timeseries_values_views %>%
   tbl_df() %>%
@@ -68,12 +62,6 @@ write_csv(bigeyeio.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/
 ## SKJCIO
 
 ```{r setup, include=FALSE}
-# RAM datasets to use
-ram_datasets <- c('timeseries_values_views', 'stock', 'area', 'bioparams', 'timeseries_assessments_views',
-                  'bioparams_values_views', 'assessor', 'management', 'assessment')
-# Remove all unneccessary RAM data
-rm(list = c(ls()[!(ls() %in% ram_datasets)]))
-
 # Extract main RAM timeseries, with BdivBmsypref and UdivUmsypref
 skjcio.ram.ts <- timeseries_values_views %>%
   tbl_df() %>%
@@ -93,12 +81,6 @@ write_csv(skjcio.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/sk
 ## YFINEIO
 
 ```{r}
-# RAM datasets to use
-ram_datasets <- c('timeseries_values_views', 'stock', 'area', 'bioparams', 'timeseries_assessments_views',
-                  'bioparams_values_views', 'assessor', 'management', 'assessment')
-# Remove all unneccessary RAM data
-rm(list = c(ls()[!(ls() %in% ram_datasets)]))
-
 # Extract main RAM timeseries, with BdivBmsypref and UdivUmsypref
 yfineio.ram.ts <- timeseries_values_views %>%
   tbl_df() %>%
@@ -119,12 +101,6 @@ write_csv(yfineio.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/y
 ## BLKMARLINIO
 
 ```{r}
-# RAM datasets to use
-ram_datasets <- c('timeseries_values_views', 'stock', 'area', 'bioparams', 'timeseries_assessments_views',
-                  'bioparams_values_views', 'assessor', 'management', 'assessment')
-# Remove all unneccessary RAM data
-rm(list = c(ls()[!(ls() %in% ram_datasets)]))
-
 # Extract main RAM timeseries, with BdivBmsypref and UdivUmsypref
 blkmarlinio.ram.ts <- timeseries_values_views %>%
   tbl_df() %>%
@@ -144,12 +120,6 @@ write_csv(blkmarlinio.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/da
 ## BMARLINIO
 
 ```{r}
-# RAM datasets to use
-ram_datasets <- c('timeseries_values_views', 'stock', 'area', 'bioparams', 'timeseries_assessments_views',
-                  'bioparams_values_views', 'assessor', 'management', 'assessment')
-# Remove all unneccessary RAM data
-rm(list = c(ls()[!(ls() %in% ram_datasets)]))
-
 # Extract main RAM timeseries, with BdivBmsypref and UdivUmsypref
 bmarlinio.ram.ts <- timeseries_values_views %>%
   tbl_df() %>%
@@ -171,12 +141,6 @@ write_csv(bmarlinio.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data
 ## STMARLINIO (no update)
 
 ```{r}
-# RAM datasets to use
-ram_datasets <- c('timeseries_values_views', 'stock', 'area', 'bioparams', 'timeseries_assessments_views',
-                  'bioparams_values_views', 'assessor', 'management', 'assessment')
-# Remove all unneccessary RAM data
-rm(list = c(ls()[!(ls() %in% ram_datasets)]))
-
 # Extract main RAM timeseries, with BdivBmsypref and UdivUmsypref
 stmarlinio.ram.ts <- timeseries_values_views %>%
   tbl_df() %>%
