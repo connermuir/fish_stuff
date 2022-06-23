@@ -6,7 +6,7 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 
 library(here)
 library(tidyverse)
@@ -104,7 +104,51 @@ stmarlinwcnpac.ram.ts <- timeseries_values_views %>%
 
 stmarlinwcnpac.ram.dbase <- stmarlinwcnpac.ram.ts 
 
-write_csv(stmarlinnepac.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/stmarlinwcnpac_catch.csv")
+write_csv(stmarlinwcnpac.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/stmarlinwcnpac_catch.csv")
 
 # Ends in 2013
 ```
+
+# SWORDEPAC (no update)
+
+```{r}
+# Extract main RAM timeseries, with BdivBmsypref and UdivUmsypref
+swordepac.ram.ts <- timeseries_values_views %>%
+  tbl_df() %>%
+  select(stockid, stocklong, year, UdivUmsypref, TBbest, TBdivTBmsy, BdivBmsypref, TAC, TCbest, ERbest, SSB, F, FdivFmsy, ) %>% #These are some of the metrics of interest, but this can be changed to select more if needed.
+  left_join(tbl_df(stock),by = c("stockid", "stocklong")) %>%
+  left_join(tbl_df(area), by = "areaid") %>%
+  select(-inmyersdb, -myersstockid, -alternateareaname) %>% 
+  filter(stockid == 'SWORDEPAC') %>% #We are only interested in "country == multinational", so removing the two countries that have pelagic stock assessments that are not multinational.
+  select(stockid, year, TCbest)
+   #Not one of the RFMOs we're interested in, so removing it.
+
+swordepac.ram.dbase <- swordepac.ram.ts 
+
+write_csv(swordepac.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/swordepac_catch.csv")
+
+# Ends in 2012
+```
+
+## SWORDNPAC (no update)
+
+```{r}
+# Extract main RAM timeseries, with BdivBmsypref and UdivUmsypref
+swordnpac.ram.ts <- timeseries_values_views %>%
+  tbl_df() %>%
+  select(stockid, stocklong, year, UdivUmsypref, TBbest, TBdivTBmsy, BdivBmsypref, TAC, TCbest, ERbest, SSB, F, FdivFmsy, ) %>% #These are some of the metrics of interest, but this can be changed to select more if needed.
+  left_join(tbl_df(stock),by = c("stockid", "stocklong")) %>%
+  left_join(tbl_df(area), by = "areaid") %>%
+  select(-inmyersdb, -myersstockid, -alternateareaname) %>% 
+  filter(stockid == 'SWORDNPAC') %>% #We are only interested in "country == multinational", so removing the two countries that have pelagic stock assessments that are not multinational.
+  select(stockid, year, TCbest)
+   #Not one of the RFMOs we're interested in, so removing it.
+
+swordnpac.ram.dbase <- swordnpac.ram.ts 
+
+write_csv(swordnpac.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/swordnpac_catch.csv")
+
+# Ends in 2012
+```
+
+## SWORDSPAC (no update, NOT IN RAM)

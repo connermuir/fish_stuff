@@ -6,7 +6,7 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 library(tidyverse)
 library(here)
@@ -26,15 +26,15 @@ STMARLINIO (Done)
 STMARLINNEPAC (Done)
 STMARLINSWPO (Done)
 STMARLINWCNPAC (Done)
-SWORDEPAC
-SWORDIO
-SWORDMED
-SWORDNATL
-SWORDNPAC
-SWORDSATL
-SWORDSPAC
-SWORDWCNPAC
-WMARLINATL
+SWORDEPAC (Done)
+SWORDIO (Done)
+SWORDMED (Done)
+SWORDNATL (Done)
+SWORDNPAC (Done)
+SWORDSATL (Done)
+SWORDSPAC (Not assessed)
+SWORDWCNPAC (Done)
+WMARLINATL (Done)
 
 ## BLKMARLINIO
 
@@ -124,6 +124,73 @@ stmarlinwcnpac_combined <- read_csv(here("data", "stmarlinwcnpac_catch.csv")) %>
   rename(catch = TCbest)
 ```
 
+## SWORDEPAC
+
+```{r}
+swordepac_combined <- read_csv(here("data", "swordepac_catch.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  rename(catch = TCbest)
+```
+
+## SWORDIO
+
+```{r}
+swordio_combined <- read_csv(here("data", "swordio_catch.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  select(stockid, year, catch)
+```
+
+## SWORDMED
+
+```{r}
+swordmed_combined <- read_csv(here("data", "swordmed_catch.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  rename(catch = TCbest)
+```
+
+## SWORDNATL
+
+```{r}
+swordnatl_combined <- read_csv(here("data", "swordnatl_catch.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  rename(catch = TCbest)
+```
+
+## SWORDSATL
+
+```{r}
+swordsatl_combined <- read_csv(here("data", "swordsatl_catch.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  rename(catch = TCbest)
+```
+
+## SWORDNPAC
+
+```{r}
+swordnpac_combined <- read_csv(here("data", "swordnpac_catch.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  rename(catch = TCbest)
+```
+
+
+## SWORDSPAC (No assessmnet, not in RAM)
+
+## SWORDWCNPAC
+
+```{r}
+swordwcnpac_combined <- read_csv(here("data", "swordwcnpac_catch.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  select(stockid, year, catch)
+```
+
+## WMARLINATL
+
+```{r}
+wmarlinatl_combined <- read_csv(here("data", "wmarlinatl_catch.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  rename(catch = TCbest)
+```
+
 
 ## MASTER DF GOES HERE 
 
@@ -141,7 +208,15 @@ bill_catch <- data.frame(blkmarlinio_combined) %>%
             stmarlinio_combined,
             stmarlinnepac_combined,
             stmarlinswpo_combined,
-            stmarlinwcnpac_combined)
+            stmarlinwcnpac_combined,
+            swordepac_combined,
+            swordio_combined,
+            swordmed_combined,
+            swordnatl_combined,
+            swordsatl_combined,
+            swordnpac_combined,
+            swordwcnpac_combined,
+            wmarlinatl_combined)
   
 ```
 
