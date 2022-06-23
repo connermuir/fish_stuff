@@ -37,7 +37,7 @@ bigeyeepac.ram.ts <- timeseries_values_views %>%
 
 bigeyeepac.ram.dbase <- bigeyeepac.ram.ts 
 
-write_csv(bigeyeepac.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/bigeyeepac_catch.csv")
+write_csv(bigeyeepac.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/tuna/bigeyeepac_catch.csv")
 ```
 
 ## YFINEPAC 
@@ -56,7 +56,7 @@ yfinepac.ram.ts <- timeseries_values_views %>%
 
 yfinepac.ram.dbase <- yfinepac.ram.ts 
 
-write_csv(yfinepac.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/yfinepac_catch.csv")
+write_csv(yfinepac.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/tuna/yfinepac_catch.csv")
 ```
 
 ## STMARLINNEPAC (no update)
@@ -75,7 +75,7 @@ stmarlinnepac.ram.ts <- timeseries_values_views %>%
 
 stmarlinnepac.ram.dbase <- stmarlinnepac.ram.ts 
 
-write_csv(stmarlinnepac.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/stmarlinnepac_catch.csv")
+write_csv(stmarlinnepac.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/billfish/stmarlinnepac_catch.csv")
 
 # Ends in 2009
 ```
@@ -96,7 +96,7 @@ stmarlinwcnpac.ram.ts <- timeseries_values_views %>%
 
 stmarlinwcnpac.ram.dbase <- stmarlinwcnpac.ram.ts 
 
-write_csv(stmarlinwcnpac.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/stmarlinwcnpac_catch.csv")
+write_csv(stmarlinwcnpac.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/billfish/stmarlinwcnpac_catch.csv")
 
 # Ends in 2013
 ```
@@ -117,7 +117,7 @@ swordepac.ram.ts <- timeseries_values_views %>%
 
 swordepac.ram.dbase <- swordepac.ram.ts 
 
-write_csv(swordepac.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/swordepac_catch.csv")
+write_csv(swordepac.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/billfish/swordepac_catch.csv")
 
 # Ends in 2012
 ```
@@ -138,7 +138,7 @@ swordnpac.ram.ts <- timeseries_values_views %>%
 
 swordnpac.ram.dbase <- swordnpac.ram.ts 
 
-write_csv(swordnpac.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/swordnpac_catch.csv")
+write_csv(swordnpac.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/billfish/swordnpac_catch.csv")
 
 # Ends in 2012
 ```

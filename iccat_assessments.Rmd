@@ -37,7 +37,7 @@ albanatl.ram.ts <- timeseries_values_views %>%
 
 albanatl.ram.dbase <- albanatl.ram.ts 
 
-write_csv(albanatl.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/albanatl_catch.csv")
+write_csv(albanatl.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/tuna/albanatl_catch.csv")
 ```
 
 
@@ -57,7 +57,7 @@ atbtunaeatl.ram.ts <- timeseries_values_views %>%
 
 atbtunaeatl.ram.dbase <- atbtunaeatl.ram.ts 
 
-write_csv(atbtunaeatl.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/atbtunaeatl_catch.csv")
+write_csv(atbtunaeatl.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/tuna/atbtunaeatl_catch.csv")
 ```
 
 ## ALBASATL (no update, just pulling catch)
@@ -76,7 +76,7 @@ albasatl.ram.ts <- timeseries_values_views %>%
 
 albasatl.ram.dbase <- albasatl.ram.ts 
 
-write_csv(albasatl.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/albasatl_catch.csv")
+write_csv(albasatl.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/tuna/albasatl_catch.csv")
 ```
 
 ## BIGEYEATL (no update, just pulling catch)
@@ -94,7 +94,7 @@ bigeyeatl.ram.ts <- timeseries_values_views %>%
 
 bigeyeatl.ram.dbase <- bigeyeatl.ram.ts 
 
-write_csv(bigeyeatl.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/bigeyeatl_catch.csv")
+write_csv(bigeyeatl.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/tuna/bigeyeatl_catch.csv")
 ```
 
 ## SKJCWATL (ENDS IN 2013)
@@ -113,7 +113,7 @@ skjwatl.ram.ts <- timeseries_values_views %>%
 
 skjwatl.ram.dbase <- skjwatl.ram.ts 
 
-write_csv(skjwatl.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/skjwatl_catch.csv")
+write_csv(skjwatl.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/tuna/skjwatl_catch.csv")
 ```
 
 ## YFINATL (Ends in 2016)
@@ -132,7 +132,7 @@ yfinatl.ram.ts <- timeseries_values_views %>%
 
 yfinatl.ram.dbase <- yfinatl.ram.ts 
 
-write_csv(yfinatl.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/yfinatl_catch.csv")
+write_csv(yfinatl.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/tuna/yfinatl_catch.csv")
 ```
 
 ## BMARLINATL (no update)
@@ -151,7 +151,7 @@ bmarlinatl.ram.ts <- timeseries_values_views %>%
 
 bmarlinatl.ram.dbase <- bmarlinatl.ram.ts 
 
-write_csv(bmarlinatl.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/bmarlinatl_catch.csv")
+write_csv(bmarlinatl.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/billfish/bmarlinatl_catch.csv")
 ```
 
 
@@ -171,7 +171,7 @@ saileatl.ram.ts <- timeseries_values_views %>%
 
 saileatl.ram.dbase <- saileatl.ram.ts 
 
-write_csv(saileatl.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/saileatl_catch.csv")
+write_csv(saileatl.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/billfish/saileatl_catch.csv")
 
 # Note: only through 2010, updating with more recent numbers and resaving file
 
@@ -194,7 +194,7 @@ sailwatl.ram.ts <- timeseries_values_views %>%
 
 sailwatl.ram.dbase <- sailwatl.ram.ts 
 
-write_csv(sailwatl.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/sailwatl_catch.csv")
+write_csv(sailwatl.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/billfish/sailwatl_catch.csv")
 
 # Note: only through 2011, updating with more recent numbers and re-saving file
 
@@ -216,7 +216,7 @@ swordmed.ram.ts <- timeseries_values_views %>%
 
 swordmed.ram.dbase <- swordmed.ram.ts 
 
-write_csv(swordmed.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/swordmed_catch.csv")
+write_csv(swordmed.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/billfish/swordmed_catch.csv")
 
 # Note: only through 2009, updating with more recent numbers and re-saving file
 
@@ -238,7 +238,7 @@ swordnatl.ram.ts <- timeseries_values_views %>%
 
 swordnatl.ram.dbase <- swordnatl.ram.ts 
 
-write_csv(swordnatl.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/swordnatl_catch.csv")
+write_csv(swordnatl.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/billfish/swordnatl_catch.csv")
 
 # Note: only through 2013, updating with more recent numbers and re-saving file
 
@@ -260,7 +260,7 @@ swordsatl.ram.ts <- timeseries_values_views %>%
 
 swordsatl.ram.dbase <- swordsatl.ram.ts 
 
-write_csv(swordsatl.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/swordsatl_catch.csv")
+write_csv(swordsatl.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/billfish/swordsatl_catch.csv")
 
 # Note: only through 2013, updating with more recent numbers and re-saving file
 
@@ -282,7 +282,7 @@ wmarlinatl.ram.ts <- timeseries_values_views %>%
 
 wmarlinatl.ram.dbase <- wmarlinatl.ram.ts 
 
-write_csv(wmarlinatl.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/wmarlinatl_catch.csv")
+write_csv(wmarlinatl.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/billfish/wmarlinatl_catch.csv")
 
 # Note: only through 2010, updating with more recent numbers and re-saving file
 ```

@@ -37,7 +37,7 @@ albaio.ram.ts <- timeseries_values_views %>%
 
 albaio.ram.dbase <- albaio.ram.ts 
 
-write_csv(albaio.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/albaio_timeseries_2016.csv")
+write_csv(albaio.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/tuna/albaio_timeseries_2016.csv")
 ```
 
 ## BIGEYEIO
@@ -56,7 +56,7 @@ bigeyeio.ram.ts <- timeseries_values_views %>%
 
 bigeyeio.ram.dbase <- bigeyeio.ram.ts 
 
-write_csv(bigeyeio.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/bigeyeio_timeseries_2016.csv")
+write_csv(bigeyeio.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/tuna/bigeyeio_timeseries_2016.csv")
 ```
 
 ## SKJCIO
@@ -75,7 +75,7 @@ skjcio.ram.ts <- timeseries_values_views %>%
 
 skjcio.ram.dbase <- skjcio.ram.ts 
 
-write_csv(skjcio.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/skjcio_timeseries_2016.csv")
+write_csv(skjcio.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/tuna/skjcio_timeseries_2016.csv")
 ```
 
 ## YFINEIO
@@ -94,7 +94,7 @@ yfineio.ram.ts <- timeseries_values_views %>%
 
 yfineio.ram.dbase <- yfineio.ram.ts 
 
-write_csv(yfineio.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/yfineio_timeseries_2016.csv")
+write_csv(yfineio.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/tuna/yfineio_timeseries_2016.csv")
 ```
 
 
@@ -114,7 +114,7 @@ blkmarlinio.ram.ts <- timeseries_values_views %>%
 
 blkmarlinio.ram.dbase <- blkmarlinio.ram.ts 
 
-write_csv(blkmarlinio.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/blkmarlinio_timeseries_2014.csv")
+write_csv(blkmarlinio.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/billfish/blkmarlinio_timeseries_2014.csv")
 ```
 
 ## BMARLINIO
@@ -133,7 +133,7 @@ bmarlinio.ram.ts <- timeseries_values_views %>%
 
 bmarlinio.ram.dbase <- bmarlinio.ram.ts 
 
-write_csv(bmarlinio.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/bmarlinio_timeseries_2014.csv")
+write_csv(bmarlinio.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/billfish/bmarlinio_timeseries_2014.csv")
 ```
 
 ## IPSAILIO (not in database)
@@ -154,7 +154,7 @@ stmarlinio.ram.ts <- timeseries_values_views %>%
 
 stmarlinio.ram.dbase <- stmarlinio.ram.ts 
 
-write_csv(stmarlinio.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/stmarlinio_catch.csv")
+write_csv(stmarlinio.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/billfish/stmarlinio_catch.csv")
 
 # Note: only through 2014, updating with more recent numbers and re-saving file
 ```
@@ -176,6 +176,6 @@ swordio.ram.ts <- timeseries_values_views %>%
 
 swordio.ram.dbase <- swordio.ram.ts 
 
-write_csv(swordio.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/swordio_timeseries_2014.csv")
+write_csv(swordio.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/billfish/swordio_timeseries_2014.csv")
 ```
 

@@ -30,7 +30,7 @@ albaspac_catch <- spac_catch %>%
   mutate(stockid = case_when(stockid == "ALB" ~ "ALBASPAC"))
  
 
-write_csv(albaspac_catch, "/Users/conne/Documents/Fisheries/fish_stuff/data/albaspac_catch.csv")
+write_csv(albaspac_catch, "/Users/conne/Documents/Fisheries/fish_stuff/data/tuna/albaspac_catch.csv")
   
 ```
 
@@ -58,7 +58,7 @@ albaspac.ram.ts <- timeseries_values_views %>%
 
 albaspac.ram.dbase <- albaspac.ram.ts 
 
-write_csv(albaspac.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/albaspac_timeseries_2015.csv")
+write_csv(albaspac.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/tuna/albaspac_timeseries_2015.csv")
 ```
 
 
@@ -77,7 +77,7 @@ bigeyecwpac_catch <- bigeyecwpac_catch %>%
   mutate(stockid = case_when(stockid == "BET" ~ "BIGEYECWPAC"))
  
 
-write_csv(bigeyecwpac_catch, "/Users/conne/Documents/Fisheries/fish_stuff/data/bigeyecwpac_catch.csv")
+write_csv(bigeyecwpac_catch, "/Users/conne/Documents/Fisheries/fish_stuff/data/tuna/bigeyecwpac_catch.csv")
 ```
 
 ## RAM data for BIGEYECWPAC
@@ -96,7 +96,7 @@ bigeyecwpac.ram.ts <- timeseries_values_views %>%
 
 bigeyecwpac.ram.dbase <- bigeyecwpac.ram.ts 
 
-write_csv(bigeyecwpac.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/bigeyecwpac_timeseries_2015.csv")
+write_csv(bigeyecwpac.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/tuna/bigeyecwpac_timeseries_2015.csv")
 ```
 
 
@@ -115,7 +115,7 @@ skjcwpac_catch <- skjcwpac_catch %>%
   mutate(stockid = case_when(stockid == "SKJ" ~ "SKJCWPAC"))
  
 
-write_csv(skjcwpac_catch, "/Users/conne/Documents/Fisheries/fish_stuff/data/skjcwpac_catch.csv")
+write_csv(skjcwpac_catch, "/Users/conne/Documents/Fisheries/fish_stuff/data/tuna/skjcwpac_catch.csv")
 ```
 
 
@@ -134,7 +134,7 @@ yfincwpac_catch <- yfincwpac_catch %>%
   mutate(stockid = case_when(stockid == "YFT" ~ "YFINCWPAC"))
  
 
-write_csv(yfincwpac_catch, "/Users/conne/Documents/Fisheries/fish_stuff/data/yfincwpac_catch.csv")
+write_csv(yfincwpac_catch, "/Users/conne/Documents/Fisheries/fish_stuff/data/tuna/yfincwpac_catch.csv")
 ```
 
 ```{r}
@@ -151,7 +151,7 @@ yfincwpac.ram.ts <- timeseries_values_views %>%
 
 yfincwpac.ram.dbase <- yfincwpac.ram.ts 
 
-write_csv(yfincwpac.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/yfincwpac_timeseries_2015.csv")
+write_csv(yfincwpac.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/tuna/yfincwpac_timeseries_2015.csv")
 ```
 
 ## STMARLINSWPO (catch only)
@@ -169,7 +169,7 @@ stmarlinswpo_catch <- stmarlinswpo_catch %>%
   mutate(stockid = case_when(stockid == "MLS" ~ "STMARLINSWPO"))
  
 
-write_csv(stmarlinswpo_catch, "/Users/conne/Documents/Fisheries/fish_stuff/data/stmarlinswpo_catch.csv")
+write_csv(stmarlinswpo_catch, "/Users/conne/Documents/Fisheries/fish_stuff/data/billfish/stmarlinswpo_catch.csv")
 ```
 
 
