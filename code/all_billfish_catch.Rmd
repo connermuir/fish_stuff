@@ -217,7 +217,7 @@ bill_catch <- data.frame(blkmarlinio_combined) %>%
             swordnpac_combined,
             swordwcnpac_combined,
             wmarlinatl_combined) %>% 
-  filter(year %in% c(1975:2020))
+  filter(year %in% c(1950:2020))
 
 bill_catch_top <- bill_catch %>% 
   group_by(stockid) %>% 
