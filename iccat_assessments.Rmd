@@ -287,3 +287,49 @@ write_csv(wmarlinatl.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/dat
 # Note: only through 2010, updating with more recent numbers and re-saving file
 ```
 
+## BLSHARNATL & BLSHARSATL not in RAM
+
+## PORSHARNEATL
+
+```{r}
+# Extract main RAM timeseries, with BdivBmsypref and UdivUmsypref
+porsharneatl.ram.ts <- timeseries_values_views %>%
+  tbl_df() %>%
+  select(stockid, stocklong, year, UdivUmsypref, TBbest, TBdivTBmsy, BdivBmsypref, TAC, TCbest, ERbest, SSB, F, FdivFmsy, ) %>% #These are some of the metrics of interest, but this can be changed to select more if needed.
+  left_join(tbl_df(stock),by = c("stockid", "stocklong")) %>%
+  left_join(tbl_df(area), by = "areaid") %>%
+  select(-inmyersdb, -myersstockid, -alternateareaname) %>% 
+  filter(stockid == 'PORSHARNEATL') %>% #We are only interested in "country == multinational", so removing the two countries that have pelagic stock assessments that are not multinational.
+  select(stockid, year, TCbest)
+   #Not one of the RFMOs we're interested in, so removing it.
+
+porsharneatl.ram.dbase <- porsharneatl.ram.ts 
+
+write_csv(porsharneatl.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/shark/porsharneatl_catch.csv")
+
+# Note:  through 2018
+```
+
+## PORSHARNWATL
+
+```{r}
+# Note: ram jsut calls this PORSHARATL
+
+# Extract main RAM timeseries, with BdivBmsypref and UdivUmsypref
+porsharatl.ram.ts <- timeseries_values_views %>%
+  tbl_df() %>%
+  select(stockid, stocklong, year, UdivUmsypref, TBbest, TBdivTBmsy, BdivBmsypref, TAC, TCbest, ERbest, SSB, F, FdivFmsy, ) %>% #These are some of the metrics of interest, but this can be changed to select more if needed.
+  left_join(tbl_df(stock),by = c("stockid", "stocklong")) %>%
+  left_join(tbl_df(area), by = "areaid") %>%
+  select(-inmyersdb, -myersstockid, -alternateareaname) %>% 
+  filter(stockid == 'PORSHARATL') %>% #We are only interested in "country == multinational", so removing the two countries that have pelagic stock assessments that are not multinational.
+  select(stockid, year, TCbest)
+   #Not one of the RFMOs we're interested in, so removing it.
+
+porsharatl.ram.dbase <- porsharatl.ram.ts 
+
+write_csv(porsharatl.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/shark/porsharnwatl_catch.csv")
+
+# Note:  through 2014
+```
+

@@ -17,18 +17,18 @@ library(here)
 ## List of all Shark stocks
 
 BLSHARIO (Done)
-BLSHARNATL
-BLSHARNPAC
-BLSHARSATL
-OWTSHARCWPAC
-PORSHARNEATL
-PORSHARNWATL
-PORSHARSWATL
-SFMAKONATL
-SFMAKONPAC
-SFMAKONWPAC
-SFMAKOSATL
-SILSHARCWPAC
+BLSHARNATL (Done)
+BLSHARNPAC (Done)
+BLSHARSATL (Done)
+OWTSHARCWPAC (Questions on this one)
+PORSHARNEATL (Done)
+PORSHARNWATL (Done)
+PORSHARSWATL (Catch inconsiderable/not in RAM)
+SFMAKONATL (Done)
+SFMAKONPAC (Done)
+SFMAKONWPAC (Done)
+SFMAKOSATL (Done)
+SILSHARCWPAC (No catch/not in RAM)
 
 
 ## BLSHARIO
@@ -39,13 +39,92 @@ blshario_combined <- read_csv(here("data", "shark", "blshario_catch.csv")) %>%
   select(stockid, year, catch) 
 ```
 
-## 
+## BLSHARNATL
 
 ```{r}
-bmarlinatl_combined <- read_csv(here("data", "bmarlinatl_catch.csv")) %>% 
+blsharnatl_combined <- read_csv(here("data", "shark", "blsharnatl_catch.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  select(stockid, year, catch)
+```
+
+## BLSHARSATL
+
+```{r}
+blsharsatl_combined <- read_csv(here("data", "shark", "blsharsatl_catch.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  select(stockid, year, catch)
+```
+
+## BLSHARNPAC (only to 2012)
+
+```{r}
+blsharnpac_combined <- read_csv(here("data", "shark", "blsharnpac_timeseries_2012.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  select(stockid, year, TCbest) %>% 
+  rename(catch = TCbest)
+```
+
+## PORSHARNEATL
+
+```{r}
+porsharneatl_combined <- read_csv(here("data", "shark", "porsharneatl_catch.csv")) %>%
   filter(year %in% c(1950:2020)) %>% 
   rename(catch = TCbest)
 ```
+
+## PORSHARNWATL
+
+```{r}
+porsharnwatl_combined <- read_csv(here("data", "shark", "porsharnwatl_catch.csv")) %>%
+  filter(year %in% c(1950:2020)) %>% 
+  rename(catch = TCbest)
+```
+
+## PORSHARSWATL (Not in RAM, catch very small)
+
+## SFMAKONATL (Not in RAM)
+
+```{r}
+sfmakonatl_combined <- read_csv(here("data", "shark", "sfmakonatl_catch.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  select(stockid, year, catch)
+```
+
+## SFMAKOSATL (Not in RAM)
+
+```{r}
+sfmakosatl_combined <- read_csv(here("data", "shark", "sfmakosatl_catch.csv")) %>% 
+  filter(year %in% c(1950:2020)) %>% 
+  select(stockid, year, catch)
+```
+
+
+## SFMAKONPAC
+
+```{r}
+sfmakonpac_combined <- read_csv(here("data", "shark", "sfmakonpac_timeseries_2007.csv")) %>%
+  filter(year %in% c(1950:2020)) %>% 
+  select(stockid, year, TCbest) %>% 
+  rename(catch = TCbest)
+```
+
+
+## SFMAKONWPAC
+
+```{r}
+sfmakonwpac_combined <- read_csv(here("data", "shark", "sfmakonwpac_timeseries_2003.csv")) %>%
+  filter(year %in% c(1950:2020)) %>% 
+  select(stockid, year, TCbest) %>% 
+  rename(catch = TCbest)
+```
+
+## SILSHARCWPAC
+
+
+```{r}
+
+```
+
 
 ## MASTER DF GOES HERE 
 
@@ -53,7 +132,16 @@ bmarlinatl_combined <- read_csv(here("data", "bmarlinatl_catch.csv")) %>%
 
 # Run all chunks below before this 
 
-shark_catch <- data.frame(blshario_combined)
+shark_catch <- data.frame(blshario_combined) %>% 
+  bind_rows(blsharnatl_combined,
+            blsharsatl_combined,
+            blsharnpac_combined,
+            porsharneatl_combined,
+            porsharnwatl_combined,
+            sfmakonatl_combined,
+            sfmakosatl_combined,
+            sfmakonpac_combined,
+            sfmakonwpac_combined)
   
 ```
 

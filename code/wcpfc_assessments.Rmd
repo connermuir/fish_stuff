@@ -172,4 +172,64 @@ stmarlinswpo_catch <- stmarlinswpo_catch %>%
 write_csv(stmarlinswpo_catch, "/Users/conne/Documents/Fisheries/fish_stuff/data/billfish/stmarlinswpo_catch.csv")
 ```
 
+## BLSHARNPAC
+
+```{r}
+# Extract main RAM timeseries, with BdivBmsypref and UdivUmsypref
+blsharnpac.ram.ts <- timeseries_values_views %>%
+  tbl_df() %>%
+  select(stockid, stocklong, year, UdivUmsypref, TBbest, TBdivTBmsy, BdivBmsypref, TAC, TCbest, ERbest, SSB, F, FdivFmsy, ) %>% #These are some of the metrics of interest, but this can be changed to select more if needed.
+  left_join(tbl_df(stock),by = c("stockid", "stocklong")) %>%
+  left_join(tbl_df(area), by = "areaid") %>%
+  select(-inmyersdb, -myersstockid, -alternateareaname) %>% 
+  filter(stockid == 'BLSHARNPAC') %>% #We are only interested in "country == multinational", so removing the two countries that have pelagic stock assessments that are not multinational.
+  select(stockid:FdivFmsy, country)
+   #Not one of the RFMOs we're interested in, so removing it.
+
+blsharnpac.ram.dbase <- blsharnpac.ram.ts 
+
+write_csv(blsharnpac.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/shark/blsharnpac_timeseries_2012.csv")
+```
+
+## SFMAKONPAC
+
+```{r}
+# Extract main RAM timeseries, with BdivBmsypref and UdivUmsypref
+sfmakonpac.ram.ts <- timeseries_values_views %>%
+  tbl_df() %>%
+  select(stockid, stocklong, year, UdivUmsypref, TBbest, TBdivTBmsy, BdivBmsypref, TAC, TCbest, ERbest, SSB, F, FdivFmsy, ) %>% #These are some of the metrics of interest, but this can be changed to select more if needed.
+  left_join(tbl_df(stock),by = c("stockid", "stocklong")) %>%
+  left_join(tbl_df(area), by = "areaid") %>%
+  select(-inmyersdb, -myersstockid, -alternateareaname) %>% 
+  filter(stockid == 'SFMAKONPAC') %>% #We are only interested in "country == multinational", so removing the two countries that have pelagic stock assessments that are not multinational.
+  select(stockid:FdivFmsy, country)
+   #Not one of the RFMOs we're interested in, so removing it.
+
+sfmakonpac.ram.dbase <- sfmakonpac.ram.ts 
+
+write_csv(sfmakonpac.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/shark/sfmakonpac_timeseries_2007.csv")
+
+# only through 2007
+```
+
+## SFMAKONWPAC
+
+```{r}
+# Extract main RAM timeseries, with BdivBmsypref and UdivUmsypref
+sfmakonwpac.ram.ts <- timeseries_values_views %>%
+  tbl_df() %>%
+  select(stockid, stocklong, year, UdivUmsypref, TBbest, TBdivTBmsy, BdivBmsypref, TAC, TCbest, ERbest, SSB, F, FdivFmsy, ) %>% #These are some of the metrics of interest, but this can be changed to select more if needed.
+  left_join(tbl_df(stock),by = c("stockid", "stocklong")) %>%
+  left_join(tbl_df(area), by = "areaid") %>%
+  select(-inmyersdb, -myersstockid, -alternateareaname) %>% 
+  filter(stockid == 'SFMAKONWPAC') %>% #We are only interested in "country == multinational", so removing the two countries that have pelagic stock assessments that are not multinational.
+  select(stockid:FdivFmsy, country)
+   #Not one of the RFMOs we're interested in, so removing it.
+
+sfmakonwpac.ram.dbase <- sfmakonwpac.ram.ts 
+
+write_csv(sfmakonwpac.ram.dbase, "/Users/conne/Documents/Fisheries/fish_stuff/data/shark/sfmakonwpac_timeseries_2003.csv")
+
+# only through 2003
+```
 
