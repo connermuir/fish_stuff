@@ -260,7 +260,31 @@ tuna_catch <- data.frame(sbt_combined) %>%
             yfinatl_combined,
             yfincwpac_combined,
             yfineio_combined,
-            yfinepac_combined)
+            yfinepac_combined) %>% 
+  filter(year %in% c(1950:2020))
+
+tuna_catch_top <- tuna_catch %>% 
+  group_by(stockid) %>% 
+  summarize(catch_sum = sum(catch)) %>% 
+  arrange(desc(catch_sum)) %>% 
+  slice_max(catch_sum, n = 8)
+
+top_stocks <- c(unique(tuna_catch_top$stockid))
+  
+tuna_catch_top8 <- tuna_catch %>% 
+  filter(stockid %in% top_stocks)
+# Time series for only top 8 stocks 
+
+tuna_catch_other <- tuna_catch %>% 
+  filter(!stockid %in% top_stocks) %>% 
+  group_by(year) %>% 
+  summarize(catch = sum(catch)) %>% 
+  mutate(stockid = "Other")
+  
+#Now all remaining stocks are "other"
+
+tuna_catch_condensed <- data.frame(tuna_catch_top8) %>% 
+  bind_rows(tuna_catch_other)
   
 ```
 
@@ -268,7 +292,7 @@ tuna_catch <- data.frame(sbt_combined) %>%
 ## MASTER GRAPH GOES HERE
 
 ```{r}
-ggplot(tuna_catch, aes(x = year, y = catch, fill = stockid)) +
+ggplot(tuna_catch_condensed, aes(x = year, y = catch, fill = stockid)) +
   geom_area() +
   labs(x = "Year", y = "Catch (metric tonnes)") +
   theme_minimal()
