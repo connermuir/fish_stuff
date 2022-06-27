@@ -48,8 +48,8 @@ blkmarlinio_combined <- read_csv(here("data", "billfish", "blkmarlinio_catch.csv
 
 ```{r}
 bmarlinatl_combined <- read_csv(here("data", "billfish", "bmarlinatl_catch.csv")) %>% 
-  filter(year %in% c(1950:2020)) %>% 
-  rename(catch = TCbest)
+  filter(year %in% c(1993:2020)) %>% 
+  rename(catch = TCbest) 
 ```
 
 ##BMARLINIO
@@ -216,15 +216,39 @@ bill_catch <- data.frame(blkmarlinio_combined) %>%
             swordsatl_combined,
             swordnpac_combined,
             swordwcnpac_combined,
-            wmarlinatl_combined)
+            wmarlinatl_combined) %>% 
+  filter(year %in% c(1975:2020))
+
+bill_catch_top <- bill_catch %>% 
+  group_by(stockid) %>% 
+  summarize(catch_sum = sum(catch)) %>% 
+  arrange(desc(catch_sum)) %>% 
+  slice_max(catch_sum, n = 8)
+
+top_stocks <- c(unique(bill_catch_top$stockid))
   
+bill_catch_top8 <- bill_catch %>% 
+  filter(stockid %in% top_stocks)
+# Time series for only top 8 stocks 
+
+bill_catch_other <- bill_catch %>% 
+  filter(!stockid %in% top_stocks) %>% 
+  group_by(year) %>% 
+  summarize(catch = sum(catch)) %>% 
+  mutate(stockid = "Other")
+  
+#Now all remaining stocks are "other"
+
+bill_catch_condensed <- data.frame(bill_catch_top8) %>% 
+  bind_rows(bill_catch_other)
+
 ```
 
 
 ## MASTER GRAPH GOES HERE
 
 ```{r}
-ggplot(bill_catch, aes(x = year, y = catch, fill = stockid)) +
+ggplot(bill_catch_condensed, aes(x = year, y = catch, fill = stockid)) +
   geom_area() +
   labs(x = "Year", y = "Catch (metric tonnes)") +
   theme_minimal()
