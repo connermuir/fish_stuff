@@ -1,0 +1,41 @@
+---
+title: "Kobe Plots"
+author: "Conner Smith"
+date: "6/27/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(here)
+
+kobe_values <- read_csv(here("data", "kobe_data_complete.csv"))
+```
+
+## Tuna 
+
+```{r}
+tuna_kobe <- kobe_values %>% 
+  filter(tax_grp == 'tuna') %>% 
+  select(stockid, f_msy, b_msy, msy)
+```
+
+## Billfish
+
+```{r}
+billfish_kobe <- kobe_values %>% 
+  filter(tax_grp == 'billfish') %>% 
+  select(stockid, f_msy, b_msy, msy)
+```
+
+
+## Shark
+
+```{r}
+shark_kobe <- kobe_values %>% 
+  filter(tax_grp == 'shark') %>% 
+  select(stockid, f_msy, b_msy, msy)
+```
+
