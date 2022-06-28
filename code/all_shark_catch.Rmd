@@ -118,7 +118,7 @@ sfmakonwpac_combined <- read_csv(here("data", "shark", "sfmakonwpac_timeseries_2
   rename(catch = TCbest)
 ```
 
-## SILSHARCWPAC
+## SILSHARCWPAC (no catch)
 
 
 ```{r}
@@ -141,7 +141,8 @@ shark_catch <- data.frame(blshario_combined) %>%
             sfmakonatl_combined,
             sfmakosatl_combined,
             sfmakonpac_combined,
-            sfmakonwpac_combined)
+            sfmakonwpac_combined) %>% 
+  filter(year %in% c(1975:2005))
   
 ```
 
