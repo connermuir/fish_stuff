@@ -19,9 +19,9 @@ kobe_values <- read_csv(here("data", "kobe_data_complete.csv"))
 ```{r}
 tuna_kobe <- kobe_values %>% 
   filter(tax_grp == 'tuna') %>% 
-  select(stockid, f_msy, b_msy, msy)
+  select(stock_name, f_msy, b_msy, msy)
 
-ggplot(data = tuna_kobe, aes(x = b_msy, y = f_msy, label = stockid)) +
+ggplot(data = tuna_kobe, aes(x = b_msy, y = f_msy, label = stock_name)) +
   geom_point(aes(size = msy), color = "red") +
   geom_text(hjust = 0.5, vjust = 1.5) +
   geom_hline(yintercept = 1,linetype = 2) +
@@ -36,9 +36,9 @@ ggplot(data = tuna_kobe, aes(x = b_msy, y = f_msy, label = stockid)) +
 ```{r}
 billfish_kobe <- kobe_values %>% 
   filter(tax_grp == 'billfish') %>% 
-  select(stockid, f_msy, b_msy, msy)
+  select(stock_name, f_msy, b_msy, msy)
 
-ggplot(data = billfish_kobe, aes(x = b_msy, y = f_msy, label = stockid)) +
+ggplot(data = billfish_kobe, aes(x = b_msy, y = f_msy, label = stock_name)) +
   geom_point(aes(size = msy), color = "blue") +
   geom_text(hjust = 0.5, vjust = 1.5) +
   geom_hline(yintercept = 1,linetype = 2) +
@@ -54,9 +54,9 @@ ggplot(data = billfish_kobe, aes(x = b_msy, y = f_msy, label = stockid)) +
 ```{r}
 shark_kobe <- kobe_values %>% 
   filter(tax_grp == 'shark') %>% 
-  select(stockid, f_msy, b_msy, msy)
+  select(stock_name, f_msy, b_msy, msy)
 
-ggplot(data = shark_kobe, aes(x = b_msy, y = f_msy, label = stockid)) +
+ggplot(data = shark_kobe, aes(x = b_msy, y = f_msy, label = stock_name)) +
   geom_point(aes(size = msy), color = "green") +
   geom_text(hjust = 0.5, vjust = 1.5) +
   geom_hline(yintercept = 1,linetype = 2) +
