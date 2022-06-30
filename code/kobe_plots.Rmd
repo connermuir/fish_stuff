@@ -10,6 +10,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 library(tidyverse)
 library(here)
+library(cowplot)
+library(magick)
 
 kobe_values <- read_csv(here("data", "kobe_data_complete.csv"))
 ```
@@ -17,52 +19,79 @@ kobe_values <- read_csv(here("data", "kobe_data_complete.csv"))
 ## Tuna 
 
 ```{r}
+
+tuna_logo <- image_read(here("data", "tuna", "tuna.jpg"))
+
 tuna_kobe <- kobe_values %>% 
   filter(tax_grp == 'tuna') %>% 
-  select(stock_name, f_msy, b_msy, msy)
+  select(stock_name, f_msy, b_msy, msy) %>% 
+  rename(MSY = msy)
 
-ggplot(data = tuna_kobe, aes(x = b_msy, y = f_msy, label = stock_name)) +
-  geom_point(aes(size = msy), color = "red") +
+tuna_plot <- ggplot(data = tuna_kobe, aes(x = b_msy, y = f_msy, label = stock_name)) +
+  geom_point(aes(size = MSY), color = 'red') +
   geom_text(hjust = 0.5, vjust = 1.5, size = 3) +
   geom_hline(yintercept = 1,linetype = 2) +
   geom_vline(xintercept = 1,linetype = 2) +
   theme_classic() +
   labs(y = "F/Fmsy",
        x = "B/Bmsy")
+
+ggdraw() +
+  draw_plot(tuna_plot,x = 0, y = 0, width = 1, height = 0.85) +
+  draw_image(tuna_logo,x = 0.75, y = 0.75, width = 0.25, height = 0.25)  
+
+
 ```
 
 ## Billfish
 
 ```{r}
+
+billfish_logo <- image_read(here("data", "billfish", "swordfish.jpg"))
+
 billfish_kobe <- kobe_values %>% 
   filter(tax_grp == 'billfish') %>% 
-  select(stock_name, f_msy, b_msy, msy)
+  select(stock_name, f_msy, b_msy, msy) %>% 
+  rename(MSY = msy)
 
-ggplot(data = billfish_kobe, aes(x = b_msy, y = f_msy, label = stock_name)) +
-  geom_point(aes(size = msy), color = "blue") +
+billfish_plot <- ggplot(data = billfish_kobe, aes(x = b_msy, y = f_msy, label = stock_name)) +
+  geom_point(aes(size = MSY), color = "blue") +
   geom_text(hjust = 0.5, vjust = 1.5, size = 3) +
   geom_hline(yintercept = 1,linetype = 2) +
   geom_vline(xintercept = 1,linetype = 2) +
   theme_classic() +
   labs(y = "F/Fmsy",
        x = "B/Bmsy")
+
+ggdraw() +
+  draw_plot(billfish_plot,x = 0, y = 0, width = 1, height = 0.85) +
+  draw_image(billfish_logo,x = 0.75, y = 0.75, width = 0.25, height = 0.25)  
 ```
 
 
 ## Shark
 
 ```{r}
+
+shark_logo <- image_read(here("data", "shark", "shark.jpg"))
+  
 shark_kobe <- kobe_values %>% 
   filter(tax_grp == 'shark') %>% 
-  select(stock_name, f_msy, b_msy, msy)
+  select(stock_name, f_msy, b_msy, msy) %>% 
+  rename(MSY = msy)
 
-ggplot(data = shark_kobe, aes(x = b_msy, y = f_msy, label = stock_name)) +
-  geom_point(aes(size = msy), color = "green") +
+shark_plot <- ggplot(data = shark_kobe, 
+                     aes(x = b_msy, y = f_msy, label = stock_name)) +
+  geom_point(aes(size = MSY), color = "black") +
   geom_text(hjust = 0.5, vjust = 1.5, size = 3) +
   geom_hline(yintercept = 1,linetype = 2) +
   geom_vline(xintercept = 1,linetype = 2) +
   theme_classic() +
   labs(y = "F/Fmsy",
        x = "B/Bmsy")
+
+ggdraw() +
+  draw_plot(shark_plot,x = 0, y = 0, width = 1, height = 0.85) +
+  draw_image(shark_logo,x = 0.75, y = 0.75, width = 0.25, height = 0.25)  
 ```
 
