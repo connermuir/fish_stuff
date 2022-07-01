@@ -284,7 +284,16 @@ tuna_catch_other <- tuna_catch %>%
 #Now all remaining stocks are "other"
 
 tuna_catch_condensed <- data.frame(tuna_catch_top8) %>% 
-  bind_rows(tuna_catch_other)
+  bind_rows(tuna_catch_other) %>% 
+  mutate(stock_name = case_when(stockid == "ALBANPAC" ~ "Albacore N. Pac.",
+                                stockid == "BIGEYECWPAC" ~ "Bigeye W. Pac.",
+                                stockid == "BIGEYEIO" ~ "Bigeye Ind.",
+                                stockid == "SKJCIO" ~ "Skipjack Ind.",
+                                stockid == "SKJCWPAC" ~ "Skipjack W. Pac.",
+                                stockid == "YFINCWPAC" ~ "Yellowfin W. Pac.",
+                                stockid == "YFINEIO" ~ "Yellowfin Ind.",
+                                stockid == "YFINEPAC" ~ "Yelllowfin E. Pac.",
+                                stockid == "Other" ~ "Other")) 
   
 ```
 
@@ -292,7 +301,7 @@ tuna_catch_condensed <- data.frame(tuna_catch_top8) %>%
 ## MASTER GRAPH GOES HERE
 
 ```{r}
-ggplot(tuna_catch_condensed, aes(x = year, y = catch, fill = stockid)) +
+ggplot(tuna_catch_condensed, aes(x = year, y = catch, fill = stock_name)) +
   geom_area() +
   labs(x = "Year", y = "Catch (metric tonnes)") +
   theme_minimal()

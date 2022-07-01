@@ -240,7 +240,16 @@ bill_catch_other <- bill_catch %>%
 #Now all remaining stocks are "other"
 
 bill_catch_condensed <- data.frame(bill_catch_top8) %>% 
-  bind_rows(bill_catch_other)
+  bind_rows(bill_catch_other) %>% 
+  mutate(stock_name = case_when(stockid == "BMARLINPAC" ~ "Blue Marlin Pac.",
+                                stockid == "IPSAILIO" ~ "Sailfish Ind.",
+                                stockid == "SWORDIO" ~ "Swordfish Ind.",
+                                stockid == "SWORDMED" ~ "Swordfish Med.",
+                                stockid == "SWORDNATL" ~ "Swordfish N. Atl.",
+                                stockid == "SWORDNPAC" ~ "Swordfish N. Pac.",
+                                stockid == "SWORDSATL" ~ "Swordfish S. Atl.",
+                                stockid == "SWORDWCNPAC" ~ "Swordfish Central Pac.",
+                                stockid == "Other" ~ "Other")) 
 
 ```
 
@@ -248,7 +257,7 @@ bill_catch_condensed <- data.frame(bill_catch_top8) %>%
 ## MASTER GRAPH GOES HERE
 
 ```{r}
-ggplot(bill_catch_condensed, aes(x = year, y = catch, fill = stockid)) +
+ggplot(bill_catch_condensed, aes(x = year, y = catch, fill = stock_name)) +
   geom_area() +
   labs(x = "Year", y = "Catch (metric tonnes)") +
   theme_minimal()

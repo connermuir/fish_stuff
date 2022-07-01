@@ -143,14 +143,45 @@ shark_catch <- data.frame(blshario_combined) %>%
             sfmakonpac_combined,
             sfmakonwpac_combined) %>% 
   filter(year %in% c(1975:2005))
+
+shark_catch_top <- shark_catch %>% 
+  group_by(stockid) %>% 
+  summarize(catch_sum = sum(catch)) %>% 
+  arrange(desc(catch_sum)) %>% 
+  slice_max(catch_sum, n = 8)
+
+top_stocks <- c(unique(shark_catch_top$stockid))
   
+shark_catch_top8 <- shark_catch %>% 
+  filter(stockid %in% top_stocks)
+# Time series for only top 8 stocks 
+
+shark_catch_other <- shark_catch %>% 
+  filter(!stockid %in% top_stocks) %>% 
+  group_by(year) %>% 
+  summarize(catch = sum(catch)) %>% 
+  mutate(stockid = "Other")
+  
+#Now all remaining stocks are "other"
+
+shark_catch_condensed <- data.frame(shark_catch_top8) %>% 
+  bind_rows(shark_catch_other) %>% 
+  mutate(stock_name = case_when(stockid == "BLSHARIO" ~ "Blue Shark Ind.",
+                                stockid == "BLSHARNATL" ~ "Blue Shark N. Atl.",
+                                stockid == "BLSHARNPAC" ~ "Blue Shark N. Pac.",
+                                stockid == "BLSHARSATL" ~ "Blue Shark S. Atl.",
+                                stockid == "PORSHARNEATL" ~ "Porbeagle NE. Atl.",
+                                stockid == "SFMAKONATL" ~ "SF Mako N. Atl.",
+                                stockid == "SFMAKONPAC" ~ "SF Mako N. Pac.",
+                                stockid == "SFMAKOSATL" ~ "SF Mako S. Atl.",
+                                stockid == "Other" ~ "Other")) 
 ```
 
 
 ## MASTER GRAPH GOES HERE
 
 ```{r}
-ggplot(shark_catch, aes(x = year, y = catch, fill = stockid)) +
+ggplot(shark_catch_condensed, aes(x = year, y = catch, fill = stock_name)) +
   geom_area() +
   labs(x = "Year", y = "Catch (metric tonnes)") +
   theme_minimal()
