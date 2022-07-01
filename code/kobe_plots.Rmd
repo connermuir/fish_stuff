@@ -29,7 +29,8 @@ tuna_kobe <- kobe_values %>%
 
 tuna_plot <- ggplot(data = tuna_kobe, aes(x = b_msy, y = f_msy, label = stock_name)) +
   geom_point(aes(size = MSY), color = 'red') +
-  geom_text(hjust = 0.5, vjust = 1.5, size = 3) +
+  geom_text(check_overlap = T,
+             hjust = 0.5, vjust = 1.5, size = 3) +
   geom_hline(yintercept = 1,linetype = 2) +
   geom_vline(xintercept = 1,linetype = 2) +
   theme_classic() +
@@ -56,7 +57,8 @@ billfish_kobe <- kobe_values %>%
 
 billfish_plot <- ggplot(data = billfish_kobe, aes(x = b_msy, y = f_msy, label = stock_name)) +
   geom_point(aes(size = MSY), color = "blue") +
-  geom_text(hjust = 0.5, vjust = 1.5, size = 3) +
+  geom_text(check_overlap = T,
+            hjust = 0.5, vjust = 1.7, size = 3) +
   geom_hline(yintercept = 1,linetype = 2) +
   geom_vline(xintercept = 1,linetype = 2) +
   theme_classic() +
@@ -83,7 +85,8 @@ shark_kobe <- kobe_values %>%
 shark_plot <- ggplot(data = shark_kobe, 
                      aes(x = b_msy, y = f_msy, label = stock_name)) +
   geom_point(aes(size = MSY), color = "black") +
-  geom_text(hjust = 0.5, vjust = 1.5, size = 3) +
+  geom_text(check_overlap = T,
+            hjust = 0.5, vjust = 1.5, size = 3) +
   geom_hline(yintercept = 1,linetype = 2) +
   geom_vline(xintercept = 1,linetype = 2) +
   theme_classic() +
