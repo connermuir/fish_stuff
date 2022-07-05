@@ -183,6 +183,6 @@ shark_catch_condensed <- data.frame(shark_catch_top8) %>%
 ```{r}
 ggplot(shark_catch_condensed, aes(x = year, y = catch, fill = stock_name)) +
   geom_area() +
-  labs(x = "Year", y = "Catch (metric tonnes)") +
+  labs(x = "Year", y = "Catch (metric tonnes)", fill = "Stock") +
   theme_minimal()
 ```
