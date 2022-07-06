@@ -217,17 +217,17 @@ bill_catch <- data.frame(blkmarlinio_combined) %>%
             swordnpac_combined,
             swordwcnpac_combined,
             wmarlinatl_combined) %>% 
-  filter(year %in% c(1950:2020))
+  filter(year %in% c(1975:2018))
 
 bill_catch_top <- bill_catch %>% 
   group_by(stockid) %>% 
   summarize(catch_sum = sum(catch)) %>% 
   arrange(desc(catch_sum)) %>% 
-  slice_max(catch_sum, n = 8)
+  slice_max(catch_sum, n = 6)
 
 top_stocks <- c(unique(bill_catch_top$stockid))
   
-bill_catch_top8 <- bill_catch %>% 
+bill_catch_top6 <- bill_catch %>% 
   filter(stockid %in% top_stocks)
 # Time series for only top 8 stocks 
 
@@ -239,15 +239,13 @@ bill_catch_other <- bill_catch %>%
   
 #Now all remaining stocks are "other"
 
-bill_catch_condensed <- data.frame(bill_catch_top8) %>% 
+bill_catch_condensed <- data.frame(bill_catch_top6) %>% 
   bind_rows(bill_catch_other) %>% 
   mutate(stock_name = case_when(stockid == "BMARLINPAC" ~ "Blue Marlin Pac.",
                                 stockid == "IPSAILIO" ~ "Sailfish Ind.",
                                 stockid == "SWORDIO" ~ "Swordfish Ind.",
                                 stockid == "SWORDMED" ~ "Swordfish Med.",
                                 stockid == "SWORDNATL" ~ "Swordfish N. Atl.",
-                                stockid == "SWORDNPAC" ~ "Swordfish N. Pac.",
-                                stockid == "SWORDSATL" ~ "Swordfish S. Atl.",
                                 stockid == "SWORDWCNPAC" ~ "Swordfish Central Pac.",
                                 stockid == "Other" ~ "Other")) 
 
