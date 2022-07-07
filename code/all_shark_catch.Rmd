@@ -102,10 +102,9 @@ sfmakosatl_combined <- read_csv(here("data", "shark", "sfmakosatl_catch.csv")) %
 ## SFMAKONPAC
 
 ```{r}
-sfmakonpac_combined <- read_csv(here("data", "shark", "sfmakonpac_timeseries_2007.csv")) %>%
+sfmakonpac_combined <- read_csv(here("data", "shark", "sfmakonpac_catch.csv")) %>%
   filter(year %in% c(1950:2020)) %>% 
-  select(stockid, year, TCbest) %>% 
-  rename(catch = TCbest)
+  select(stockid, year, catch)
 ```
 
 
@@ -142,17 +141,17 @@ shark_catch <- data.frame(blshario_combined) %>%
             sfmakosatl_combined,
             sfmakonpac_combined,
             sfmakonwpac_combined) %>% 
-  filter(year %in% c(1975:2005))
+  filter(year %in% c(1975:2012))
 
 shark_catch_top <- shark_catch %>% 
   group_by(stockid) %>% 
   summarize(catch_sum = sum(catch)) %>% 
   arrange(desc(catch_sum)) %>% 
-  slice_max(catch_sum, n = 8)
+  slice_max(catch_sum, n = 6)
 
 top_stocks <- c(unique(shark_catch_top$stockid))
   
-shark_catch_top8 <- shark_catch %>% 
+shark_catch_top6 <- shark_catch %>% 
   filter(stockid %in% top_stocks)
 # Time series for only top 8 stocks 
 
@@ -164,16 +163,14 @@ shark_catch_other <- shark_catch %>%
   
 #Now all remaining stocks are "other"
 
-shark_catch_condensed <- data.frame(shark_catch_top8) %>% 
+shark_catch_condensed <- data.frame(shark_catch_top6) %>% 
   bind_rows(shark_catch_other) %>% 
   mutate(stock_name = case_when(stockid == "BLSHARIO" ~ "Blue Shark Ind.",
                                 stockid == "BLSHARNATL" ~ "Blue Shark N. Atl.",
                                 stockid == "BLSHARNPAC" ~ "Blue Shark N. Pac.",
                                 stockid == "BLSHARSATL" ~ "Blue Shark S. Atl.",
-                                stockid == "PORSHARNEATL" ~ "Porbeagle NE. Atl.",
                                 stockid == "SFMAKONATL" ~ "SF Mako N. Atl.",
                                 stockid == "SFMAKONPAC" ~ "SF Mako N. Pac.",
-                                stockid == "SFMAKOSATL" ~ "SF Mako S. Atl.",
                                 stockid == "Other" ~ "Other")) 
 ```
 
