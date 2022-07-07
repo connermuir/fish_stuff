@@ -308,6 +308,6 @@ tuna_catch_condensed <- data.frame(tuna_catch_top8) %>%
 ggplot(tuna_catch_condensed, aes(x = year, y = catch, fill = stock_name)) +
   geom_area() +
   scale_y_continuous(labels = scales::label_comma(scale = .1)) +
-  labs(x = "Year", y = "Catch (metric tonnes)", fill = "Stock") +
+  labs(x = "Year", y = "Catch (metric tons)", fill = "Stock") +
   theme_minimal()
 ```

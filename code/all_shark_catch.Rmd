@@ -20,7 +20,7 @@ BLSHARIO (Done)
 BLSHARNATL (Done)
 BLSHARNPAC (Done)
 BLSHARSATL (Done)
-OWTSHARCWPAC (Questions on this one)
+OWTSHARCWPAC (Gaps here)
 PORSHARNEATL (Done)
 PORSHARNWATL (Done)
 PORSHARSWATL (Catch inconsiderable/not in RAM)
@@ -62,6 +62,14 @@ blsharnpac_combined <- read_csv(here("data", "shark", "blsharnpac_timeseries_201
   filter(year %in% c(1950:2020)) %>% 
   select(stockid, year, TCbest) %>% 
   rename(catch = TCbest)
+```
+
+## OWTSHARCWPAC
+
+```{r}
+owtsharcwpac_combined <- read_csv(here("data", "shark", "owtsharcwpac_catch.csv")) %>%
+  filter(year %in% c(1950:2020)) %>% 
+  select(stockid, year, catch)
 ```
 
 ## PORSHARNEATL
@@ -135,6 +143,7 @@ shark_catch <- data.frame(blshario_combined) %>%
   bind_rows(blsharnatl_combined,
             blsharsatl_combined,
             blsharnpac_combined,
+            owtsharcwpac_combined,
             porsharneatl_combined,
             porsharnwatl_combined,
             sfmakonatl_combined,
@@ -180,6 +189,6 @@ shark_catch_condensed <- data.frame(shark_catch_top6) %>%
 ```{r}
 ggplot(shark_catch_condensed, aes(x = year, y = catch, fill = stock_name)) +
   geom_area() +
-  labs(x = "Year", y = "Catch (metric tonnes)", fill = "Stock") +
+  labs(x = "Year", y = "Catch (metric tons)", fill = "Stock") +
   theme_minimal()
 ```

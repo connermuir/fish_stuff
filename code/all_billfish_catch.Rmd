@@ -257,6 +257,6 @@ bill_catch_condensed <- data.frame(bill_catch_top6) %>%
 ```{r}
 ggplot(bill_catch_condensed, aes(x = year, y = catch, fill = stock_name)) +
   geom_area() +
-  labs(x = "Year", y = "Catch (metric tonnes)", fill = "Stock") +
+  labs(x = "Year", y = "Catch (metric tons)", fill = "Stock") +
   theme_minimal()
 ```
