@@ -195,6 +195,18 @@ wmarlinatl_combined <- read_csv(here("data", "billfish", "wmarlinatl_catch.csv")
 ## MASTER DF GOES HERE 
 
 ```{r}
+#Creating data frames to be able to assign rfmos to different stocks 
+
+stock_id_list <- c('BLKMARLINIO', 'BMARLINATL', 'BMARLINIO', 'BMARLINPAC', 'IPSAILIO', 'SAILEATL', 'SAILWATL', 'STMARLINIO', 'STMARLINNEPAC', 'STMARLINSWPO', 'STMARLINWCNPAC', 'SWORDEPAC', 'SWORDIO', 'SWORDMED', 'SWORDNATL', 'SWORDNPAC', 'SWORDSATL', 'SWORDSPAC', 'SWORDWCNPAC', 'WMARLINATL')
+
+rfmo_list <- c('IOTC', 'ICCAT', 'IOTC', 'IATTC', 'IOTC', 'ICCAT', 'ICCAT', 'IOTC', 'IATTC', 'WCPFC', 'IATTC', 'IATTC', 'IOTC', 'ICCAT', 'ICCAT', 'IATTC', 'ICCAT', 'ICCAT', 'WCPFC', 'ICCAT')
+
+rfmo_billfish <- data.frame(stock_id_list, rfmo_list) %>% 
+  rename(rfmo = rfmo_list,
+         stockid = stock_id_list)
+```
+
+```{r}
 
 # Run all chunks below before this 
 
@@ -216,8 +228,18 @@ bill_catch <- data.frame(blkmarlinio_combined) %>%
             swordsatl_combined,
             swordnpac_combined,
             swordwcnpac_combined,
-            wmarlinatl_combined) %>% 
-  filter(year %in% c(1975:2018))
+            wmarlinatl_combined) 
+
+tax_grp <- "billfish"
+
+
+bill_catch_clean <- merge(bill_catch, rfmo_billfish) %>% 
+  bind_cols(tax_grp) %>%
+  rename(tax_grp = ...5)
+
+# writing full catch data frame to csv including taxonomy group and rfmo for master catch graph. 
+
+write.csv(bill_catch_clean, "/Users/conne/Documents/Fisheries/fish_stuff/data/billfish/all_billfish_catch.csv")
 
 bill_catch_top <- bill_catch %>% 
   group_by(stockid) %>% 
@@ -247,7 +269,8 @@ bill_catch_condensed <- data.frame(bill_catch_top6) %>%
                                 stockid == "SWORDMED" ~ "Swordfish Med.",
                                 stockid == "SWORDNATL" ~ "Swordfish N. Atl.",
                                 stockid == "SWORDWCNPAC" ~ "Swordfish Central Pac.",
-                                stockid == "Other" ~ "Other")) 
+                                stockid == "Other" ~ "Other")) %>% 
+  filter(year %in% c(1975:2018))
 
 ```
 

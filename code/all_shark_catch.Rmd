@@ -135,10 +135,22 @@ sfmakonwpac_combined <- read_csv(here("data", "shark", "sfmakonwpac_timeseries_2
 
 ## MASTER DF GOES HERE 
 
+
+
 ```{r}
+#Creating data frames to be able to assign rfmos to different stocks 
 
-# Run all chunks below before this 
+stock_id_list <- c('BLSHARIO', 'BLSHARNATL', 'BLSHARNPAC', 'BLSHARSATL', 'OWTSHARCWPAC', 'PORSHARNEATL', 'PORSHARATL', 'PORSHARSWATL', 'SFMAKONATL', 'SFMAKONPAC', 'SFMAKONWPAC', 'SFMAKOSATL', 'SILSHARCWPAC')
 
+rfmo_list <- c('IOTC', 'ICCAT', 'WCPFC', 'ICCAT', 'WCPFC', 'ICCAT', 'ICCAT', 'ICCAT', 'ICCAT', 'WCPFC', 'IATTC', 'ICCAT', 'WCPFC')
+
+rfmo_shark <- data.frame(stock_id_list, rfmo_list) %>% 
+  rename(rfmo = rfmo_list,
+         stockid = stock_id_list)
+```
+
+
+```{r}
 shark_catch <- data.frame(blshario_combined) %>% 
   bind_rows(blsharnatl_combined,
             blsharsatl_combined,
@@ -149,8 +161,19 @@ shark_catch <- data.frame(blshario_combined) %>%
             sfmakonatl_combined,
             sfmakosatl_combined,
             sfmakonpac_combined,
-            sfmakonwpac_combined) %>% 
-  filter(year %in% c(1975:2012))
+            sfmakonwpac_combined) 
+
+tax_grp <- "shark"
+
+
+shark_catch_clean <- merge(shark_catch, rfmo_shark) %>% 
+  bind_cols(tax_grp) %>%
+  rename(tax_grp = ...5)
+
+# writing full catch data frame to csv including taxonomy group and rfmo for master catch graph. 
+
+write.csv(shark_catch_clean, "/Users/conne/Documents/Fisheries/fish_stuff/data/shark/all_shark_catch.csv")
+
 
 shark_catch_top <- shark_catch %>% 
   group_by(stockid) %>% 
@@ -180,7 +203,8 @@ shark_catch_condensed <- data.frame(shark_catch_top6) %>%
                                 stockid == "BLSHARSATL" ~ "Blue Shark S. Atl.",
                                 stockid == "SFMAKONATL" ~ "SF Mako N. Atl.",
                                 stockid == "SFMAKONPAC" ~ "SF Mako N. Pac.",
-                                stockid == "Other" ~ "Other")) 
+                                stockid == "Other" ~ "Other")) %>% 
+  filter(year %in% c(1975:2012))
 ```
 
 

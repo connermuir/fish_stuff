@@ -242,6 +242,18 @@ yfinepac_combined <- read_csv(here("data", "tuna", "yfinepac_catch.csv")) %>%
 ## MASTER DF GOES HERE 
 
 ```{r}
+#Creating data frames to be able to assign rfmos to different stocks 
+
+stock_id_list <- c('ALBAIO', 'ALBAMED', 'ALBANATL', 'ALBANPAC', 'ALBASATL', 'ALBASPAC', 'ATBTUNAEATL', 'ATBTUNAWATL', 'BIGEYEATL', 'BIGEYECWPAC', 'BIGEYEEPAC', 'BIGEYEIO', 'PACBTUNA', 'SBT', 'SKJCIO', 'SKJCWPAC', 'SKJEATL', 'SKJEPAC', 'SKJWATL', 'YFINATL', 'YFINCWPAC', 'YFINEIO', 'YFINEPAC')
+
+rfmo_list <- c('IOTC', 'ICCAT', 'ICCAT', 'IATTC', 'ICCAT', 'WCPFC', 'ICCAT', 'ICCAT', 'ICCAT', 'WCPFC', 'IATTC', 'IOTC', 'IATTC', 'CCSBT', 'IOTC', 'WCPFC', 'ICCAT', 'IATTC', 'ICCAT', 'ICCAT', 'WCPFC', 'IOTC', 'IATTC' )
+
+rfmo_tuna <- data.frame(stock_id_list, rfmo_list) %>% 
+  rename(rfmo = rfmo_list,
+         stockid = stock_id_list)
+```
+
+```{r}
 
 # Run all chunks below before this 
 
@@ -265,7 +277,18 @@ tuna_catch <- data.frame(sbt_combined) %>%
             yfincwpac_combined,
             yfineio_combined,
             yfinepac_combined) %>% 
-    filter(year %in% c(1975:2018))
+  select(stockid, year, catch)
+
+tax_grp <- "tuna"
+
+
+tuna_catch_clean <- merge(tuna_catch, rfmo_tuna) %>% 
+  bind_cols(tax_grp) %>%
+  rename(tax_grp = ...5)
+
+# writing full catch data frame to csv including taxonomy group and rfmo for master catch graph. 
+
+write.csv(tuna_catch_clean, "/Users/conne/Documents/Fisheries/fish_stuff/data/tuna/all_tuna_catch.csv")
 
 tuna_catch_top <- tuna_catch %>% 
   group_by(stockid) %>% 
@@ -297,7 +320,8 @@ tuna_catch_condensed <- data.frame(tuna_catch_top8) %>%
                                 stockid == "YFINCWPAC" ~ "Yellowfin W. Pac.",
                                 stockid == "YFINEIO" ~ "Yellowfin Ind.",
                                 stockid == "YFINEPAC" ~ "Yelllowfin E. Pac.",
-                                stockid == "Other" ~ "Other")) 
+                                stockid == "Other" ~ "Other")) %>% 
+    filter(year %in% c(1975:2018))
   
 ```
 
@@ -305,9 +329,12 @@ tuna_catch_condensed <- data.frame(tuna_catch_top8) %>%
 ## MASTER GRAPH GOES HERE
 
 ```{r}
-ggplot(tuna_catch_condensed, aes(x = year, y = catch, fill = stock_name)) +
+tuna_catch_plot <- ggplot(tuna_catch_condensed, aes(x = year, y = catch, fill = stock_name)) +
   geom_area() +
   scale_y_continuous(labels = scales::label_comma(scale = .1)) +
   labs(x = "Year", y = "Catch (metric tons)", fill = "Stock") +
   theme_minimal()
+tuna_catch
+
+ggsave("tuna_catch.png", plot = tuna_catch_plot)
 ```
