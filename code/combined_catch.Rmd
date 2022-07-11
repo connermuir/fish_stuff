@@ -1,0 +1,61 @@
+---
+title: "Combined Catch"
+author: "Conner Smith"
+date: "7/11/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+library(tidyverse)
+library(here)
+
+```
+
+## Read in the Data 
+
+```{r}
+shark_catch <- read_csv(here('data', 'shark', 'all_shark_catch.csv'))
+
+billfish_catch <- read_csv(here('data', 'billfish', 'all_billfish_catch.csv'))
+
+tuna_catch <- read_csv(here('data', 'tuna', 'all_tuna_catch.csv'))
+
+all_catch <- data.frame(tuna_catch) %>% 
+  bind_rows(billfish_catch,
+            shark_catch) %>% 
+  drop_na()
+
+all_catch_condensed <- all_catch %>% 
+  group_by(year, tax_grp) %>% 
+  summarize(catch = sum(catch)) %>% 
+  filter(year %in% c(1975:2018))
+```
+
+
+## Catch for All Stocks 
+
+```{r}
+ggplot(all_catch_condensed, aes(x = year, y = catch, fill = tax_grp)) +
+  geom_area() +
+  scale_y_continuous(labels = scales::label_comma(scale = .1)) +
+  labs(x = "Year", y = "Catch (metric tons)", fill = "Taxonomy Group") +
+  theme_minimal()
+```
+
+## Catch by RFMO 
+
+```{r}
+all_catch_rfmo <- all_catch %>% 
+  group_by(year, rfmo) %>% 
+  summarize(catch = sum(catch)) %>% 
+  filter(year %in% c(1975:2020))
+
+ggplot(all_catch_rfmo, aes(x = year, y = catch, fill = rfmo)) +
+  geom_area() +
+  scale_y_continuous(labels = scales::label_comma(scale = .1)) +
+  labs(x = "Year", y = "Catch (metric tons)", fill = "RFMO") +
+  theme_minimal()
+```
+
