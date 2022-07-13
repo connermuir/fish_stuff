@@ -11,7 +11,9 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(here)
 library(cowplot)
-library(magick)
+library(patchwork)
+library(png)
+library(jpeg)
 
 kobe_values <- read_csv(here("data", "kobe_data_complete.csv"))
 ```
@@ -20,7 +22,7 @@ kobe_values <- read_csv(here("data", "kobe_data_complete.csv"))
 
 ```{r}
 
-tuna_logo <- image_read(here("data", "tuna", "tuna.jpg"))
+tuna_logo <- readPNG(here("data", "tuna", "red_tuna.png"), native = TRUE)
 
 tuna_kobe <- kobe_values %>% 
   filter(tax_grp == 'tuna') %>% 
@@ -28,18 +30,27 @@ tuna_kobe <- kobe_values %>%
   rename(MSY = msy)
 
 tuna_plot <- ggplot(data = tuna_kobe, aes(x = b_msy, y = f_msy, label = stock_name)) +
-  geom_point(aes(size = MSY), color = 'red') +
+  geom_point(aes(size = MSY), color = 'coral2') +
   geom_text(check_overlap = T,
              hjust = 0.5, vjust = 1.5, size = 3) +
   geom_hline(yintercept = 1,linetype = 2) +
   geom_vline(xintercept = 1,linetype = 2) +
   theme_classic() +
+  theme(panel.border = element_rect(colour = "black", fill = NA, size = 1)) +
   labs(y = "F/Fmsy",
        x = "B/Bmsy")
 
-ggdraw() +
-  draw_plot(tuna_plot,x = 0, y = 0, width = 1, height = 0.85) +
-  draw_image(tuna_logo,x = 0.75, y = 0.75, width = 0.25, height = 0.25)  
+tuna_plot_image <- tuna_plot +
+  inset_element(tuna_logo,
+                left = 0.5,
+                bottom = 0.6,
+                right = 0.95,
+                top = 0.95)
+tuna_plot_image
+
+#ggdraw() +
+ # draw_plot(tuna_plot,x = 0, y = 0, width = 1, height = 0.85) +
+  #draw_image(tuna_logo,x = 0.75, y = 0.75, width = 0.25, height = 0.25)  
 
 
 ```
@@ -48,7 +59,7 @@ ggdraw() +
 
 ```{r}
 
-billfish_logo <- image_read(here("data", "billfish", "swordfish.jpg"))
+billfish_logo <- readJPEG(here("data", "billfish", "sword_blue.jpg"), native = TRUE)
 
 billfish_kobe <- kobe_values %>% 
   filter(tax_grp == 'billfish') %>% 
@@ -56,18 +67,27 @@ billfish_kobe <- kobe_values %>%
   rename(MSY = msy)
 
 billfish_plot <- ggplot(data = billfish_kobe, aes(x = b_msy, y = f_msy, label = stock_name)) +
-  geom_point(aes(size = MSY), color = "blue") +
+  geom_point(aes(size = MSY), color = "steelblue4") +
   geom_text(check_overlap = T,
             hjust = 0.5, vjust = 1.7, size = 3) +
   geom_hline(yintercept = 1,linetype = 2) +
   geom_vline(xintercept = 1,linetype = 2) +
   theme_classic() +
+  theme(panel.border = element_rect(colour = "black", fill = NA, size = 1)) +
   labs(y = "F/Fmsy",
        x = "B/Bmsy")
 
-ggdraw() +
-  draw_plot(billfish_plot,x = 0, y = 0, width = 1, height = 0.85) +
-  draw_image(billfish_logo,x = 0.75, y = 0.75, width = 0.25, height = 0.25)  
+billfish_plot_image <- billfish_plot +
+  inset_element(billfish_logo,
+                left = 0.5,
+                bottom = 0.6,
+                right = 0.95,
+                top = 0.95)
+billfish_plot_image
+
+#ggdraw() +
+  #draw_plot(billfish_plot,x = 0, y = 0, width = 1, height = 0.85) +
+  #draw_image(billfish_logo,x = 0.75, y = 0.75, width = 0.25, height = 0.25)  
 ```
 
 
@@ -75,7 +95,7 @@ ggdraw() +
 
 ```{r}
 
-shark_logo <- image_read(here("data", "shark", "shark.jpg"))
+shark_logo <- readJPEG(here("data", "shark", "grn_shark.jpg"), native = TRUE)
   
 shark_kobe <- kobe_values %>% 
   filter(tax_grp == 'shark') %>% 
@@ -84,17 +104,26 @@ shark_kobe <- kobe_values %>%
 
 shark_plot <- ggplot(data = shark_kobe, 
                      aes(x = b_msy, y = f_msy, label = stock_name)) +
-  geom_point(aes(size = MSY), color = "black") +
+  geom_point(aes(size = MSY), color = "olivedrab3") +
   geom_text(check_overlap = T,
             hjust = 0.5, vjust = 1.5, size = 3) +
   geom_hline(yintercept = 1,linetype = 2) +
   geom_vline(xintercept = 1,linetype = 2) +
   theme_classic() +
+  theme(panel.border = element_rect(colour = "black", fill = NA, size = 1)) +
   labs(y = "F/Fmsy",
        x = "B/Bmsy")
 
-ggdraw() +
-  draw_plot(shark_plot,x = 0, y = 0, width = 1, height = 0.85) +
-  draw_image(shark_logo,x = 0.75, y = 0.75, width = 0.25, height = 0.25)  
+shark_plot_image <- shark_plot +
+  inset_element(shark_logo,
+                left = 0.5,
+                bottom = 0.6,
+                right = 0.95,
+                top = 0.95)
+shark_plot_image
+
+#ggdraw() +
+ # draw_plot(shark_plot,x = 0, y = 0, width = 1, height = 0.85) +
+ # draw_image(shark_logo,x = 0.75, y = 0.75, width = 0.25, height = 0.25)  
 ```
 

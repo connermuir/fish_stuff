@@ -10,7 +10,10 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 library(tidyverse)
 library(here)
+library(forcats)
 
+colors <- c("olivedrab3", "steelblue4", "coral2")
+names(colors) = c("Shark", "Billfish", "Tuna")
 ```
 
 ## Read in the Data 
@@ -25,6 +28,9 @@ tuna_catch <- read_csv(here('data', 'tuna', 'all_tuna_catch.csv'))
 all_catch <- data.frame(tuna_catch) %>% 
   bind_rows(billfish_catch,
             shark_catch) %>% 
+  mutate(tax_grp = case_when(tax_grp == "tuna" ~ "Tuna",
+                                tax_grp == "billfish" ~ "Billfish",
+                                tax_grp == "shark" ~ "Shark")) %>% 
   drop_na()
 
 all_catch_condensed <- all_catch %>% 
@@ -37,9 +43,11 @@ all_catch_condensed <- all_catch %>%
 ## Catch for All Stocks 
 
 ```{r}
-ggplot(all_catch_condensed, aes(x = year, y = catch, fill = tax_grp)) +
+ggplot(all_catch_condensed, aes(x = year, y = catch, 
+                                fill = fct_reorder(tax_grp, catch))) +
   geom_area() +
   scale_y_continuous(labels = scales::label_comma(scale = .1)) +
+  scale_fill_manual(values = colors) +
   labs(x = "Year", y = "Catch (metric tons)", fill = "Taxonomy Group") +
   theme_minimal()
 ```
@@ -48,14 +56,18 @@ ggplot(all_catch_condensed, aes(x = year, y = catch, fill = tax_grp)) +
 
 ```{r}
 all_catch_rfmo <- all_catch %>% 
-  group_by(year, rfmo) %>% 
+  group_by(year, rfmo, tax_grp) %>% 
+  filter(rfmo != "CCSBT") %>% 
   summarize(catch = sum(catch)) %>% 
-  filter(year %in% c(1975:2020))
+  filter(year %in% c(1975:2019))
 
-ggplot(all_catch_rfmo, aes(x = year, y = catch, fill = rfmo)) +
+ggplot(all_catch_rfmo, aes(x = year, y = catch, 
+                           fill = fct_reorder(tax_grp, catch))) +
   geom_area() +
+  facet_wrap(~ rfmo, ncol = 2) +
   scale_y_continuous(labels = scales::label_comma(scale = .1)) +
-  labs(x = "Year", y = "Catch (metric tons)", fill = "RFMO") +
+  scale_fill_manual(values = colors) +
+  labs(x = "Year", y = "Catch (metric tons)", fill = "Taxonomy Group") +
   theme_minimal()
 ```
 
