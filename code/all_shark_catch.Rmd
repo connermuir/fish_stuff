@@ -11,6 +11,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 library(tidyverse)
 library(here)
+library(paletteer)
 
 ```
 
@@ -211,8 +212,10 @@ shark_catch_condensed <- data.frame(shark_catch_top6) %>%
 ## MASTER GRAPH GOES HERE
 
 ```{r}
-ggplot(shark_catch_condensed, aes(x = year, y = catch, fill = stock_name)) +
+ggplot(shark_catch_condensed, aes(x = year, y = catch, 
+                                  fill = fct_reorder(stock_name, catch))) +
   geom_area() +
+  scale_fill_paletteer_d("RColorBrewer::Greens") +
   labs(x = "Year", y = "Catch (metric tons)", fill = "Stock") +
   theme_minimal()
 ```

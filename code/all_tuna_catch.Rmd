@@ -312,14 +312,14 @@ tuna_catch_other <- tuna_catch %>%
 
 tuna_catch_condensed <- data.frame(tuna_catch_top8) %>% 
   bind_rows(tuna_catch_other) %>% 
-  mutate(stock_name = case_when(stockid == "YFINATL" ~ "Yellowfin N. Atl.",
-                                stockid == "BIGEYECWPAC" ~ "Bigeye W. Pac.",
-                                stockid == "BIGEYEIO" ~ "Bigeye Ind.",
-                                stockid == "SKJCIO" ~ "Skipjack Ind.",
-                                stockid == "SKJCWPAC" ~ "Skipjack W. Pac.",
+  mutate(stock_name = case_when(stockid == "SKJCWPAC" ~ "Skipjack W. Pac.",
                                 stockid == "YFINCWPAC" ~ "Yellowfin W. Pac.",
+                                stockid == "SKJCIO" ~ "Skipjack Ind.",
                                 stockid == "YFINEIO" ~ "Yellowfin Ind.",
                                 stockid == "YFINEPAC" ~ "Yelllowfin E. Pac.",
+                                stockid == "BIGEYECWPAC" ~ "Bigeye W. Pac.",
+                                stockid == "ALBANPAC" ~ "Albacore N. Pac.",
+                                stockid == "BIGEYEIO" ~ "Bigeye Ind.",
                                 stockid == "Other" ~ "Other")) %>% 
     filter(year %in% c(1975:2018))
   
@@ -329,12 +329,14 @@ tuna_catch_condensed <- data.frame(tuna_catch_top8) %>%
 ## MASTER GRAPH GOES HERE
 
 ```{r}
-tuna_catch_plot <- ggplot(tuna_catch_condensed, aes(x = year, y = catch, fill = stock_name)) +
+tuna_catch_plot <- ggplot(tuna_catch_condensed, 
+                          aes(x = year, y = catch, 
+                              fill = fct_reorder(stock_name, catch))) +
   geom_area() +
   scale_y_continuous(labels = scales::label_comma(scale = .1)) +
   labs(x = "Year", y = "Catch (metric tons)", fill = "Stock") +
   theme_minimal()
-tuna_catch
+tuna_catch_plot
 
 ggsave("tuna_catch.png", plot = tuna_catch_plot)
 ```

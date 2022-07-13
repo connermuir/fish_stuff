@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 library(tidyverse)
 library(here)
-
+library(paletteer)
 ```
 
 ## List of all Billfish stocks
@@ -228,7 +228,8 @@ bill_catch <- data.frame(blkmarlinio_combined) %>%
             swordsatl_combined,
             swordnpac_combined,
             swordwcnpac_combined,
-            wmarlinatl_combined) 
+            wmarlinatl_combined) %>% 
+  filter(year %in% c(1975:2018))
 
 tax_grp <- "billfish"
 
@@ -242,6 +243,7 @@ bill_catch_clean <- merge(bill_catch, rfmo_billfish) %>%
 write.csv(bill_catch_clean, "/Users/conne/Documents/Fisheries/fish_stuff/data/billfish/all_billfish_catch.csv")
 
 bill_catch_top <- bill_catch %>% 
+  filter(year %in% c(1975:2018)) %>% 
   group_by(stockid) %>% 
   summarize(catch_sum = sum(catch)) %>% 
   arrange(desc(catch_sum)) %>% 
@@ -263,12 +265,12 @@ bill_catch_other <- bill_catch %>%
 
 bill_catch_condensed <- data.frame(bill_catch_top6) %>% 
   bind_rows(bill_catch_other) %>% 
-  mutate(stock_name = case_when(stockid == "BMARLINPAC" ~ "Blue Marlin Pac.",
+  mutate(stock_name = case_when(stockid == "SWORDIO" ~ "Swordfish Ind.",
+                                stockid == "BMARLINPAC" ~ "Blue Marlin Pac.",
                                 stockid == "IPSAILIO" ~ "Sailfish Ind.",
-                                stockid == "SWORDIO" ~ "Swordfish Ind.",
-                                stockid == "SWORDMED" ~ "Swordfish Med.",
-                                stockid == "SWORDNATL" ~ "Swordfish N. Atl.",
                                 stockid == "SWORDWCNPAC" ~ "Swordfish Central Pac.",
+                                stockid == "SWORDNATL" ~ "Swordfish N. Atl.",
+                                stockid == "SWORDMED" ~ "Swordfish Med.",
                                 stockid == "Other" ~ "Other")) %>% 
   filter(year %in% c(1975:2018))
 
@@ -278,8 +280,10 @@ bill_catch_condensed <- data.frame(bill_catch_top6) %>%
 ## MASTER GRAPH GOES HERE
 
 ```{r}
-ggplot(bill_catch_condensed, aes(x = year, y = catch, fill = stock_name)) +
+ggplot(bill_catch_condensed, aes(x = year, y = catch, 
+                                 fill = fct_reorder(stock_name, catch))) +
   geom_area() +
+  scale_fill_paletteer_d("RColorBrewer::Blues") +
   labs(x = "Year", y = "Catch (metric tons)", fill = "Stock") +
   theme_minimal()
 ```
