@@ -212,10 +212,13 @@ shark_catch_condensed <- data.frame(shark_catch_top6) %>%
 ## MASTER GRAPH GOES HERE
 
 ```{r}
-ggplot(shark_catch_condensed, aes(x = year, y = catch, 
+shark_catch_plot <- ggplot(shark_catch_condensed, aes(x = year, y = catch, 
                                   fill = fct_reorder(stock_name, catch))) +
   geom_area() +
   scale_fill_paletteer_d("RColorBrewer::Greens") +
   labs(x = "Year", y = "Catch (metric tons)", fill = "Stock") +
   theme_minimal()
+shark_catch_plot
+
+ggsave("shark_catch.png", plot = shark_catch_plot, bg = 'white')
 ```

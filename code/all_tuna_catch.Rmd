@@ -10,6 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 library(tidyverse)
 library(here)
+library(paletteer)
 
 ```
 
@@ -334,9 +335,10 @@ tuna_catch_plot <- ggplot(tuna_catch_condensed,
                               fill = fct_reorder(stock_name, catch))) +
   geom_area() +
   scale_y_continuous(labels = scales::label_comma(scale = .1)) +
+  scale_fill_paletteer_d("RColorBrewer::Reds") +
   labs(x = "Year", y = "Catch (metric tons)", fill = "Stock") +
   theme_minimal()
 tuna_catch_plot
 
-ggsave("tuna_catch.png", plot = tuna_catch_plot)
+ggsave("tuna_catch.png", plot = tuna_catch_plot, bg = 'white')
 ```

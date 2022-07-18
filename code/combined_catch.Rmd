@@ -43,13 +43,17 @@ all_catch_condensed <- all_catch %>%
 ## Catch for All Stocks 
 
 ```{r}
-ggplot(all_catch_condensed, aes(x = year, y = catch, 
+all_catch_plot <- ggplot(all_catch_condensed, aes(x = year, y = catch, 
                                 fill = fct_reorder(tax_grp, catch))) +
   geom_area() +
   scale_y_continuous(labels = scales::label_comma(scale = .1)) +
   scale_fill_manual(values = colors) +
   labs(x = "Year", y = "Catch (metric tons)", fill = "Taxonomy Group") +
   theme_minimal()
+all_catch_plot
+
+ggsave("all_catch.png", plot = all_catch_plot, bg = 'white')
+
 ```
 
 ## Catch by RFMO 
@@ -61,7 +65,7 @@ all_catch_rfmo <- all_catch %>%
   summarize(catch = sum(catch)) %>% 
   filter(year %in% c(1975:2019))
 
-ggplot(all_catch_rfmo, aes(x = year, y = catch, 
+rfmo_catch_plot <- ggplot(all_catch_rfmo, aes(x = year, y = catch, 
                            fill = fct_reorder(tax_grp, catch))) +
   geom_area() +
   facet_wrap(~ rfmo, ncol = 2) +
@@ -69,5 +73,8 @@ ggplot(all_catch_rfmo, aes(x = year, y = catch,
   scale_fill_manual(values = colors) +
   labs(x = "Year", y = "Catch (metric tons)", fill = "Taxonomy Group") +
   theme_minimal()
+rfmo_catch_plot
+
+ggsave("rfmo_catch.png", plot = rfmo_catch_plot, bg = 'white')
 ```
 

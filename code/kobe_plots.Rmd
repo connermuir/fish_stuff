@@ -14,6 +14,7 @@ library(cowplot)
 library(patchwork)
 library(png)
 library(jpeg)
+library(ggrepel)
 
 kobe_values <- read_csv(here("data", "kobe_data_complete.csv"))
 ```
@@ -31,8 +32,7 @@ tuna_kobe <- kobe_values %>%
 
 tuna_plot <- ggplot(data = tuna_kobe, aes(x = b_msy, y = f_msy, label = stock_name)) +
   geom_point(aes(size = MSY), color = 'coral2') +
-  geom_text(check_overlap = T,
-             hjust = 0.5, vjust = 1.5, size = 3) +
+  geom_text_repel(check_overlap = T, size = 3) +
   geom_hline(yintercept = 1,linetype = 2) +
   geom_vline(xintercept = 1,linetype = 2) +
   theme_classic() +
@@ -47,6 +47,8 @@ tuna_plot_image <- tuna_plot +
                 right = 0.95,
                 top = 0.95)
 tuna_plot_image
+
+ggsave("tuna_kobe.png", plot = tuna_plot_image, bg = 'white')
 
 #ggdraw() +
  # draw_plot(tuna_plot,x = 0, y = 0, width = 1, height = 0.85) +
@@ -68,8 +70,7 @@ billfish_kobe <- kobe_values %>%
 
 billfish_plot <- ggplot(data = billfish_kobe, aes(x = b_msy, y = f_msy, label = stock_name)) +
   geom_point(aes(size = MSY), color = "steelblue4") +
-  geom_text(check_overlap = T,
-            hjust = 0.5, vjust = 1.7, size = 3) +
+  geom_text_repel(check_overlap = T, size = 3) +
   geom_hline(yintercept = 1,linetype = 2) +
   geom_vline(xintercept = 1,linetype = 2) +
   theme_classic() +
@@ -84,6 +85,8 @@ billfish_plot_image <- billfish_plot +
                 right = 0.95,
                 top = 0.95)
 billfish_plot_image
+
+ggsave("billfish_kobe.png", plot = billfish_plot_image, bg = 'white')
 
 #ggdraw() +
   #draw_plot(billfish_plot,x = 0, y = 0, width = 1, height = 0.85) +
@@ -105,8 +108,7 @@ shark_kobe <- kobe_values %>%
 shark_plot <- ggplot(data = shark_kobe, 
                      aes(x = b_msy, y = f_msy, label = stock_name)) +
   geom_point(aes(size = MSY), color = "olivedrab3") +
-  geom_text(check_overlap = T,
-            hjust = 0.5, vjust = 1.5, size = 3) +
+  geom_text_repel(check_overlap = T, size = 3) +
   geom_hline(yintercept = 1,linetype = 2) +
   geom_vline(xintercept = 1,linetype = 2) +
   theme_classic() +
@@ -121,6 +123,8 @@ shark_plot_image <- shark_plot +
                 right = 0.95,
                 top = 0.95)
 shark_plot_image
+
+ggsave("shark_kobe.png", plot = shark_plot_image, bg = 'white')
 
 #ggdraw() +
  # draw_plot(shark_plot,x = 0, y = 0, width = 1, height = 0.85) +

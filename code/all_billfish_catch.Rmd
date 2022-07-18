@@ -280,10 +280,13 @@ bill_catch_condensed <- data.frame(bill_catch_top6) %>%
 ## MASTER GRAPH GOES HERE
 
 ```{r}
-ggplot(bill_catch_condensed, aes(x = year, y = catch, 
+billfish_catch_plot <- ggplot(bill_catch_condensed, aes(x = year, y = catch, 
                                  fill = fct_reorder(stock_name, catch))) +
   geom_area() +
   scale_fill_paletteer_d("RColorBrewer::Blues") +
   labs(x = "Year", y = "Catch (metric tons)", fill = "Stock") +
   theme_minimal()
+billfish_catch_plot
+
+ggsave("billfish_catch.png", plot = billfish_catch_plot, bg = 'white')
 ```
