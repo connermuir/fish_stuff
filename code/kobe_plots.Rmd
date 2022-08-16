@@ -30,6 +30,14 @@ tuna_kobe <- kobe_values %>%
   select(stock_name, f_msy, b_msy, msy) %>% 
   rename(MSY = msy)
 
+tuna_summary <- tuna_kobe %>% 
+  drop_na() %>%  
+  mutate(mean_b = mean(b_msy),
+            mean_f = mean(f_msy)) %>% 
+  mutate(med_b = median(b_msy),
+            med_f = median(f_msy))
+
+
 tuna_plot <- ggplot(data = tuna_kobe, aes(x = b_msy, y = f_msy, label = stock_name)) +
   geom_point(aes(size = MSY), color = 'coral2') +
   geom_text_repel(check_overlap = T, size = 3) +
@@ -43,7 +51,7 @@ tuna_plot <- ggplot(data = tuna_kobe, aes(x = b_msy, y = f_msy, label = stock_na
 tuna_plot_image <- tuna_plot +
   inset_element(tuna_logo,
                 left = 0.5,
-                bottom = 0.6,
+                bottom = 0.7,
                 right = 0.95,
                 top = 0.95)
 tuna_plot_image
@@ -66,7 +74,14 @@ billfish_logo <- readJPEG(here("data", "billfish", "sword_blue.jpg"), native = T
 billfish_kobe <- kobe_values %>% 
   filter(tax_grp == 'billfish') %>% 
   select(stock_name, f_msy, b_msy, msy) %>% 
-  rename(MSY = msy)
+  rename(MSY = msy) 
+
+billfish_summary <- billfish_kobe %>% 
+  drop_na() %>%  
+  mutate(mean_b = mean(b_msy),
+            mean_f = mean(f_msy)) %>% 
+  mutate(med_b = median(b_msy),
+            med_f = median(f_msy))
 
 billfish_plot <- ggplot(data = billfish_kobe, aes(x = b_msy, y = f_msy, label = stock_name)) +
   geom_point(aes(size = MSY), color = "steelblue4") +
@@ -81,7 +96,7 @@ billfish_plot <- ggplot(data = billfish_kobe, aes(x = b_msy, y = f_msy, label = 
 billfish_plot_image <- billfish_plot +
   inset_element(billfish_logo,
                 left = 0.5,
-                bottom = 0.6,
+                bottom = 0.7,
                 right = 0.95,
                 top = 0.95)
 billfish_plot_image
@@ -103,7 +118,15 @@ shark_logo <- readJPEG(here("data", "shark", "grn_shark.jpg"), native = TRUE)
 shark_kobe <- kobe_values %>% 
   filter(tax_grp == 'shark') %>% 
   select(stock_name, f_msy, b_msy, msy) %>% 
-  rename(MSY = msy)
+  rename(MSY = msy) %>% 
+  replace_na(list(MSY = 0))
+
+shark_summary <- shark_kobe %>% 
+  drop_na() %>%  
+  mutate(mean_b = mean(b_msy),
+            mean_f = mean(f_msy)) %>% 
+  mutate(med_b = median(b_msy),
+            med_f = median(f_msy))
 
 shark_plot <- ggplot(data = shark_kobe, 
                      aes(x = b_msy, y = f_msy, label = stock_name)) +
@@ -119,7 +142,7 @@ shark_plot <- ggplot(data = shark_kobe,
 shark_plot_image <- shark_plot +
   inset_element(shark_logo,
                 left = 0.5,
-                bottom = 0.6,
+                bottom = 0.7,
                 right = 0.95,
                 top = 0.95)
 shark_plot_image
